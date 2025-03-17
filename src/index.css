@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/fonts/Satoshi-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Satoshi-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "satoshi", ui-sans-serif, system-ui, sans-serif;
+  background-color: #131313;
+}
+
+.text-logo {
+  font-family: "D3 Euronism Bold italic", ui-sans-serif, system-ui, sans-serif;
+  font-family: "EURONEW", ui-sans-serif, system-ui, sans-serif;
+  color: #f7f7f7;
+}
+
+.text-logo2 {
+  font-family: "eurostile", ui-sans-serif, system-ui, sans-serif;
+  color: #f7f7f7;
+}
+
+.hero-text {
+  font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  color: #f7f7f7;
+  font-weight: 700;
+}
+
+.service-image {
+  background: #8e2de2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #8e2de2, #4a00e0); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+}
+
+.contact-card {
+  position: fixed;
+  inset: 0;
+  border-radius: 30px;
+  background: white;
+  background: rgba(21, 21, 21, 0.85);
+}
+
+.contact-card-box {
+  box-shadow: 15px 15px 20px rgb(25, 25, 25), -5px -5px 10px rgb(60, 60, 60);
+  background: #1b1a1a;
+}
+
+.card {
+  background-color: var(--bg-color);
+  padding: 1rem 2rem;
+  border-radius: 1.25rem;
+}
+.loader {
+  color: rgb(124, 124, 124);
+  font-family: "Satoshi", sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 40px;
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 8px;
+}
+
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
+}
+
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+  color: #5048e5;
+  animation: spin_4991 8s infinite;
+}
+
+@keyframes spin_4991 {
+  0%,
+  20% {
+    transform: translateY(0%);
+  }
+
+  30%,
+  45% {
+    transform: translateY(-100%);
+  }
+
+  55%,
+  70% {
+    transform: translateY(-200%);
+  }
+
+  80%,
+  95% {
+    transform: translateY(-300%);
+  }
+
+  100% {
+    transform: translateY(-400%);
+  }
+}

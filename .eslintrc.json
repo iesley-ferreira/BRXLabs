@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
+  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y", "tailwindcss", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "tailwindcss/classnames-order": "warn",
+    "tailwindcss/enforces-shorthand": "warn",
+    "tailwindcss/no-custom-classname": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
