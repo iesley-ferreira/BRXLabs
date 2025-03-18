@@ -88,6 +88,32 @@ html {
   animation: spin_4991 8s infinite;
 }
 
+@keyframes pulseCustom {
+  0%,
+  50% {
+    box-shadow: 0 0 0 0 rgba(80, 72, 229, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(80, 72, 229, 0);
+  }
+}
+
+.animate-custom-pulse {
+  animation: pulseCustom 2s infinite;
+}
+
+.carousel-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(30px);
+  background-color: rgba(65, 65, 65, 0.308);
+  border: 1px solid rgba(255, 255, 255, 0.089);
+  /* cursor: pointer; */
+}
+
 @keyframes spin_4991 {
   0%,
   20% {

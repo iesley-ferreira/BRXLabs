@@ -100,17 +100,15 @@ export default function ContactButton() {
   };
 
   return (
-    <>
-      {/* Botão fixo na lateral direita */}
+    <div>
       <button
         onClick={() => {
           setIsOpen(true);
-          // Opcional: reseta os estados ao abrir o modal
           setFormData({ name: "", phone: "", email: "" });
           setMessage("");
           setIsSubmitted(false);
         }}
-        className="fixed top-8/12 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#5048e5e3] text-[#a6a4d4e0] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white"
+        className="fixed top-8/12 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#473ee7] text-[#bebed6f5] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white animate-custom-pulse pulse-element"
       >
         Fale Conosco
       </button>
@@ -203,6 +201,6 @@ export default function ContactButton() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

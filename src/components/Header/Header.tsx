@@ -91,7 +91,7 @@ const Header = () => {
               onClick={toggleDrawer(true)}
               className="relative z-30 text-white focus:outline-none"
             >
-              {drawerOpen ? <div></div> : <Menu size={24} />}
+              {drawerOpen ? <div></div> : <Menu size={30} />}
             </button>
           </div>
         </div>
@@ -120,22 +120,42 @@ const Header = () => {
           <List>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#home" onClick={toggleDrawer(false)}>
-                <ListItemText primary="Home" />
+                <ListItemText
+                  primary="Home"
+                  primaryTypographyProps={{
+                    style: { fontFamily: "Satoshi, sans-serif", fontSize: "20px" },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#services" onClick={toggleDrawer(false)}>
-                <ListItemText primary="Serviços" />
+                <ListItemText
+                  primary="Serviços"
+                  primaryTypographyProps={{
+                    style: { fontFamily: "Satoshi, sans-serif", fontSize: "20px" },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#portfolio" onClick={toggleDrawer(false)}>
-                <ListItemText primary="Portfólio" />
+                <ListItemText
+                  primary="Portfólio"
+                  primaryTypographyProps={{
+                    style: { fontFamily: "Satoshi, sans-serif", fontSize: "20px" },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton component="a" href="#contact" onClick={toggleDrawer(false)}>
-                <ListItemText primary="Contato" />
+                <ListItemText
+                  primary="Contato"
+                  primaryTypographyProps={{
+                    style: { fontFamily: "Satoshi, sans-serif", fontSize: "20px" },
+                  }}
+                />
               </ListItemButton>
             </ListItem>
           </List>

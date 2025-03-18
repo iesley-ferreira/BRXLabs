@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import activecampaign from "../../assets/images/activecampaign.svg";
 import Botconversa from "../../assets/images/botconversa.svg";
 import clinicorp from "../../assets/images/clinicorp.svg";
@@ -21,12 +21,12 @@ import zapi from "../../assets/images/zapi.png";
 // Exemplo de array com tecnologias.
 const technologies = [
   {
-    name: "Activecampaign",
-    svg: <img className="max-h-32 max-w-46" src={activecampaign} alt="activecampaign logo" />,
-  },
-  {
     name: "EvolutionApi",
     svg: <img className="max-h-22 max-w-40" src={evolutionapi} alt="evolutionapi logo" />,
+  },
+  {
+    name: "Activecampaign",
+    svg: <img className="max-h-32 max-w-46" src={activecampaign} alt="activecampaign logo" />,
   },
   {
     name: "Make",
@@ -97,7 +97,7 @@ const technologies = [
 
 const Carousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
-
+  const duplicatedTechnologies = useMemo(() => [...technologies, ...technologies], []);
   useEffect(() => {
     const interval = setInterval(() => {
       if (carouselRef.current) {
@@ -115,13 +115,13 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full p-6 bg-[#6c19ff] rounded-md">
+    <div className="carousel-container relative w-full p-6 bg-[#e4e2e2de] rounded-md">
       {/* Container do carousel com rolagem horizontal e barra oculta */}
       <div ref={carouselRef} className="flex space-x-4 overflow-x-auto  scrollbar-hide">
-        {technologies.map((tech, index) => (
+        {duplicatedTechnologies.map((tech, index) => (
           <div
             key={index}
-            className="flex-shrink-0 flex flex-col items-center justify-center p-4 rounded-lg min-w-[150px]"
+            className="flex-shrink-0 flex flex-col items-center justify-center  rounded-lg min-w-[150px]"
           >
             {tech.svg}
             {/* <p className="mt-2 text-sm font-medium">{tech.name}</p> */}
