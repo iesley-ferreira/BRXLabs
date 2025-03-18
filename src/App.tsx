@@ -1,4 +1,5 @@
 import "./App.css";
+import Carousel from "./components/Carousel/Carousel";
 import ContactButton from "./components/ContactButton/ContactButton";
 import ContactSection from "./components/ContactSection/ContactSection";
 import Footer from "./components/Footer/Footer";
@@ -14,6 +15,7 @@ function App() {
       <Hero />
       <ContactButton />
       <ServicesProvided />
+      <Carousel />
       <HowItWorks />
       <ContactSection />
       <Footer />

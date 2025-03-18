@@ -1,9 +1,9 @@
 const HowItWorks = () => {
   return (
-    <section className="pt-28 pb-20 h-screen flex items-center overflow-hidden bg-[#131313]">
-      <div className="container mx-auto px-4">
+    <section className="pt-20 pb-20 min-h-screen flex items-center overflow-hidden bg-[#131313c4]">
+      <div className="container h-full mx-auto px-4">
         <div className="mb-16 text-white w-fit py-3 px-3 rounded-2xl  m-auto">
-          <span className="text-md uppercase text-primary font-semibold mx-auto text-center rounded-md bg-primary/10 p-2  inline-block">
+          <span className="text-md uppercase font-semibold mx-auto text-center rounded-md bg-primary/10 p-2  inline-block">
             Como trabalhamos
           </span>
         </div>

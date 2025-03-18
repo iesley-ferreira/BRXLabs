@@ -14,17 +14,6 @@ body {
   background-color: #131313;
 }
 
-.text-logo {
-  font-family: "D3 Euronism Bold italic", ui-sans-serif, system-ui, sans-serif;
-  font-family: "EURONEW", ui-sans-serif, system-ui, sans-serif;
-  color: #f7f7f7;
-}
-
-.text-logo2 {
-  font-family: "eurostile", ui-sans-serif, system-ui, sans-serif;
-  color: #f7f7f7;
-}
-
 .hero-text {
   font-family: "Satoshi", ui-sans-serif, system-ui, sans-serif;
   color: #f7f7f7;
@@ -119,4 +108,14 @@ body {
   100% {
     transform: translateY(-400%);
   }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Para Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
