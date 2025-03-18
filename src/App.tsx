@@ -12,12 +12,18 @@ function App() {
   return (
     <div className="bg-[#131313] p-4 h-screen">
       <Header />
-      <Hero />
+      <section id="home">
+        <Hero />
+      </section>
       <ContactButton />
-      <ServicesProvided />
+      <section id="services">
+        <ServicesProvided />
+      </section>
       <Carousel />
       <HowItWorks />
-      <ContactSection />
+      <section id="contact">
+        <ContactSection />
+      </section>
       <Footer />
     </div>
   );

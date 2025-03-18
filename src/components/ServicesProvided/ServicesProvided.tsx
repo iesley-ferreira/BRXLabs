@@ -147,10 +147,10 @@ const ServicesProvided = () => {
     <div className="bg-[#131313] py-20">
       <div className="flex flex-col items-center w-full">
         {servicesData.map((service, index) => (
-          <div key={index} className="flex align-center flex-wrap w-9/12 mb-20">
+          <div key={index} className="flex align-center flex-wrap w-9/12 lg-w-full mb-20">
             {/* Texto */}
-            <div className="w-full lg:w-1/2 p-6">
-              <div className="lg:max-w-lg">
+            <div className="w-full lg:w-1/2">
+              <div className="">
                 <h2 className="relative z-10 mb-6 max-w-4xl mx-auto text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-zinc-600 leading-tight">
                   {service.title}
                 </h2>
@@ -161,7 +161,7 @@ const ServicesProvided = () => {
             </div>
 
             {/* Imagem ilustrativa */}
-            <div className="w-full lg:w-1/2 p-6 flex justify-center">
+            <div className="w-full lg:w-1/2 flex justify-center">
               <div className="service-image w-lg h-96 rounded-3xl">
                 <img
                   className="relative top-10 mx-auto w-md h-96 rounded-3xl transform hover:-translate-y-16 transition ease-in-out duration-500"
