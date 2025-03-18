@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContactButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,8 +7,28 @@ export default function ContactButton() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isContactVisible, setIsContactVisible] = useState(false);
 
-  // Formata o telefone para o padrão (XX) XXXXX-XXXX
+  // Detecta se a seção de contato está visível na viewport
+  useEffect(() => {
+    const contactSection = document.querySelector("#contact");
+    if (!contactSection) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsContactVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(contactSection);
+    return () => observer.disconnect();
+  }, []);
+
+  // Se a seção de contato estiver visível, não renderiza o botão
+  if (isContactVisible) return null;
+
+  // Função para formatar o telefone para o padrão (XX) XXXXX-XXXX
   const formatPhone = (value: string) => {
     const digits = value.replace(/\D/g, "").slice(0, 11);
     if (digits.length === 0) return "";
@@ -90,10 +110,7 @@ export default function ContactButton() {
           setMessage("");
           setIsSubmitted(false);
         }}
-        className="fixed top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer 
-                   bg-[#5048e5e3] text-[#a6a4d4e0] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md 
-                   hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all 
-                   hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white"
+        className="fixed top-8/12 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#5048e5e3] text-[#a6a4d4e0] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white"
       >
         Fale Conosco
       </button>
@@ -176,7 +193,7 @@ export default function ContactButton() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full mt-6 bg-[#956afa] hover:bg-[#7d4fd1] transition text-white font-semibold py-3 rounded-md mouse-pointer"
+                    className="w-full mt-6 bg-[#956afa] hover:bg-[#7d4fd1] transition text-white font-semibold py-3 rounded-md"
                   >
                     {loading ? "Enviando..." : "Enviar"}
                   </button>

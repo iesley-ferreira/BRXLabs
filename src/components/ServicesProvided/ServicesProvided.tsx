@@ -144,13 +144,20 @@ const ServiceCategory = ({ category, points }: { category: string; points: strin
 
 const ServicesProvided = () => {
   return (
-    <div className="bg-[#131313] py-20">
-      <div className="flex flex-col items-center w-full">
+    <div className="bg-[#131313] w-full py-20">
+      <div className="flex flex-col items-center w-10/12 md-w-8/12 mx-auto">
         {servicesData.map((service, index) => (
-          <div key={index} className="flex align-center flex-wrap w-9/12 lg-w-full mb-20">
+          <div
+            data-aos="fade-up"
+            data-aos-anchor-placement="top-center"
+            key={index}
+            className={`flex w-1/2 flex-col lg:flex-row ${
+              index % 2 !== 0 ? "lg:flex-row-reverse" : "lg:flex-row"
+            } items-center flex-wrap w-full mt-10 mb-20`}
+          >
             {/* Texto */}
             <div className="w-full lg:w-1/2">
-              <div className="">
+              <div className="lg-p-6">
                 <h2 className="relative z-10 mb-6 max-w-4xl mx-auto text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-zinc-600 leading-tight">
                   {service.title}
                 </h2>

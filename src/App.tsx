@@ -1,3 +1,6 @@
+import AOS from "aos";
+import "aos/dist/aos.css"; // Importa os estilos do AOS
+import { useEffect } from "react";
 import "./App.css";
 import Carousel from "./components/Carousel/Carousel";
 import ContactButton from "./components/ContactButton/ContactButton";
@@ -9,6 +12,14 @@ import HowItWorks from "./components/HowItWorks/HowItWorks";
 import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1200, // duração da animação em milissegundos
+      once: true, // se true, animação ocorre apenas uma vez
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
     <div className="bg-[#131313] p-4 h-screen">
       <Header />

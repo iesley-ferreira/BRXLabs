@@ -115,7 +115,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full p-6 bg-[#4d4b4623] rounded-2xl">
+    <div className="relative w-full p-6 bg-[#6c19ff] rounded-md">
       {/* Container do carousel com rolagem horizontal e barra oculta */}
       <div ref={carouselRef} className="flex space-x-4 overflow-x-auto  scrollbar-hide">
         {technologies.map((tech, index) => (
