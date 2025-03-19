@@ -1,6 +1,7 @@
 const servicesData = [
   {
     title: "Automação para Atendimento",
+    image: "src/assets/images/chatbotia.webp",
     items: [
       {
         category: "WhatsApp",
@@ -41,6 +42,7 @@ const servicesData = [
   },
   {
     title: "Automação de Processos Administrativos",
+    image: "src/assets/images/machinelearning.webp",
     items: [
       {
         category: "CRM para Clínicas e Consultórios",
@@ -54,6 +56,7 @@ const servicesData = [
   },
   {
     title: "Automação para Marketing Médico e Relacionamento com Pacientes",
+    image: "src/assets/images/aicellphone.webp",
     items: [
       {
         category: "Instagram",
@@ -90,6 +93,7 @@ const servicesData = [
   },
   {
     title: "Automação para Lançamentos e Venda de Tratamentos",
+    image: "src/assets/images/aiagentlabel.png",
     items: [
       {
         category: "Promoções e Campanhas Periódicas",
@@ -170,10 +174,10 @@ const ServicesProvided = () => {
             {/* Imagem ilustrativa */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <div className="service-image w-lg h-96 rounded-3xl">
-                <img
+              <img
                   className="relative top-10 mx-auto w-md h-96 rounded-3xl transform hover:-translate-y-16 transition ease-in-out duration-500"
-                  src="src/assets/imgteste2.webp"
-                  alt="Automação"
+                  src={service.image}
+                  alt={service.title}
                 />
               </div>
             </div>
