@@ -10,6 +10,7 @@ import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App() {
       <section id="contact">
         <ContactSection />
       </section>
+      <ScrollToTop />
       <Footer />
     </div>
   );
