@@ -35,7 +35,7 @@ const servicesData =
   },
   {
     "title": "Automação de Processos Administrativos",
-    "image": "./machinelearning.webp",
+    "image": "./process.png",
     "items": [
       {
         "category": "CRM para Negócios e Empreendedores",
