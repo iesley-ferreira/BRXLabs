@@ -92,7 +92,6 @@ const technologies = [
     name: "google-sheets",
     svg: <img className="max-h-22 max-w-40" src={googlesheets48} alt="google-sheets-48 logo" />,
   },
-  // Adicione outras tecnologias conforme necessário
 ];
 
 const Carousel = () => {

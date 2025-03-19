@@ -114,6 +114,19 @@ html {
   /* cursor: pointer; */
 }
 
+.embla {
+  overflow: hidden;
+  position: relative;
+  overflow: visible;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
 @keyframes spin_4991 {
   0%,
   20% {

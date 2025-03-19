@@ -7,7 +7,7 @@ const HowItWorks = () => {
             Como trabalhamos
           </span>
         </div>
-        <h2 className="mb-20 font-heading font-semibold text-6xl sm:text-7xl text-white text-center">
+        <h2 className="mb-20 font-heading font-semibold text-3xl md:text-6xl text-white text-center">
           Transformamos desafios em soluções
         </h2>
 

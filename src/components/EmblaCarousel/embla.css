@@ -1,0 +1,21 @@
+.embla {
+  /* max-width: 48rem; */
+  background-color: #5655551a;
+  border-radius: 6px;
+  /* margin: auto; */
+  /* --slide-height: 19rem; */
+  /* --slide-spacing: 0.1rem; */
+  /* --slide-size: 100px; */
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: 30px;
+}
+.embla__slide {
+  width: fit-content !important;
+  max-width: 300px;
+}
