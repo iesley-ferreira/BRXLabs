@@ -53,8 +53,8 @@ const Header = () => {
               </g>
             </svg>
           </div>
-          <a href="#portfolio" className="text-white hover:text-gray-300">
-            Portfólio
+          <a href="#metodologia" className="text-white hover:text-gray-300">
+            Metodologia
           </a>
           <a href="#contact" className="text-white hover:text-gray-300">
             Contato
@@ -139,9 +139,9 @@ const Header = () => {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton component="a" href="#portfolio" onClick={toggleDrawer(false)}>
+              <ListItemButton component="a" href="#metodologia" onClick={toggleDrawer(false)}>
                 <ListItemText
-                  primary="Portfólio"
+                  primary="Metodologia"
                   primaryTypographyProps={{
                     style: { fontFamily: "Satoshi, sans-serif", fontSize: "20px" },
                   }}

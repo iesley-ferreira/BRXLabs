@@ -33,7 +33,9 @@ function App() {
       </section>
       <EmblaCarousel />
       {/* <Carousel /> */}
+      <section id="metodologia">
       <HowItWorks />
+      </section>
       <section id="contact">
         <ContactSection />
       </section>
