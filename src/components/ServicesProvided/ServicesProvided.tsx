@@ -143,7 +143,7 @@ const ServiceCategory = ({ category, points }: { category: string; points: strin
 
 const ServicesProvided = () => {
   return (
-    <div className="bg-[#131313] w-full py-20">
+    <div className="bg-[#131313] w-full pt-10 pb-20">
       <div className="flex flex-col items-center w-10/12 md-w-8/12 mx-auto">
         {servicesData.map((service, index) => (
           <div
