@@ -1,7 +1,7 @@
 const servicesData = [
   {
     title: "Automação para Atendimento",
-    image: "src/assets/images/chatbotia.webp",
+    image: "./chatbotia.webp",
     items: [
       {
         category: "WhatsApp",
@@ -42,7 +42,7 @@ const servicesData = [
   },
   {
     title: "Automação de Processos Administrativos",
-    image: "src/assets/images/machinelearning.webp",
+    image: "./machinelearning.webp",
     items: [
       {
         category: "CRM para Clínicas e Consultórios",
@@ -56,7 +56,7 @@ const servicesData = [
   },
   {
     title: "Automação para Marketing Médico e Relacionamento com Pacientes",
-    image: "src/assets/images/aicellphone.webp",
+    image: "./aicellphone.webp",
     items: [
       {
         category: "Instagram",
@@ -93,7 +93,7 @@ const servicesData = [
   },
   {
     title: "Automação para Lançamentos e Venda de Tratamentos",
-    image: "src/assets/images/aiagentlabel.png",
+    image: "./aiagentlabel.png",
     items: [
       {
         category: "Promoções e Campanhas Periódicas",
