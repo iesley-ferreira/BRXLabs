@@ -1,117 +1,112 @@
-const servicesData = [
+const servicesData = 
+[
   {
-    title: "Automação para Atendimento",
-    image: "./chatbotia.webp",
-    items: [
+    "title": "Automação para Atendimento",
+    "image": "./chatbotia.webp",
+    "items": [
       {
-        category: "WhatsApp",
-        points: [
-          "Envio automatizado de mensagens para pacientes.",
-          "Lembretes de consultas e exames agendados.",
-          "Oferta de pacotes promocionais para tratamentos.",
-          "Funis de recuperação de pacientes que não compareceram.",
-          "Suporte automatizado para dúvidas frequentes.",
-        ],
+        "category": "WhatsApp",
+        "points": [
+          "Automatize o atendimento no WhatsApp e melhore a comunicação com clientes, pacientes e leads.",
+          "Lembretes inteligentes reduzem faltas e aumentam a taxa de conversão em diversos segmentos.",
+          "Envio automático de promoções e pacotes personalizados para clientes e alunos.",
+          "Funis estratégicos para recuperação de leads, pacientes ou clientes inativos.",
+          "Suporte instantâneo para dúvidas frequentes, reduzindo carga da equipe de atendimento."
+        ]
       },
       {
-        category: "Chatbots e Inteligência Artificial",
-        points: [
-          "Atendimento virtual para agendamento de consultas e exames.",
-          "Respostas automáticas para dúvidas frequentes sobre tratamentos.",
-          "Encaminhamento de pacientes para setores específicos via chatbot.",
-        ],
+        "category": "Chatbots e Inteligência Artificial",
+        "points": [
+          "Responda clientes e leads 24h por dia sem esforço. Nossa IA entende e resolve dúvidas rapidamente.",
+          "Chatbots inteligentes para agendamento de reuniões, consultas ou suporte técnico.",
+          "Encaminhamento automático de leads para setores específicos, otimizando a conversão e atendimento."
+        ]
       },
       {
-        category: "Gerenciamento de Agendamentos",
-        points: [
-          "Confirmação automática de consultas e exames.",
-          "Lembretes de compromissos via WhatsApp, SMS e e-mail.",
-          "Reagendamento automatizado para evitar faltas.",
-          "Organização de listas de espera para encaixes.",
-        ],
-      },
-      {
-        category: "Avisos e Notificações",
-        points: [
-          "Aviso sobre campanhas de check-up e exames preventivos.",
-          "Notificação de retorno para acompanhamento médico e odontológico.",
-          "Comunicação automática sobre novos serviços e tratamentos.",
-        ],
-      },
-    ],
+        "category": "Gerenciamento de Agendamentos",
+        "points": [
+          "Confirmação automática de compromissos, sessões ou reuniões para evitar cancelamentos de última hora.",
+          "Lembretes estratégicos via WhatsApp, SMS e e-mail para manter clientes e pacientes informados.",
+          "Reagendamentos automáticos para otimizar a agenda e evitar horários vagos.",
+          "Gerenciamento inteligente de listas de espera para encaixes e otimização do tempo."
+        ]
+      }
+    ]
   },
   {
-    title: "Automação de Processos Administrativos",
-    image: "./machinelearning.webp",
-    items: [
+    "title": "Automação de Processos Administrativos",
+    "image": "./machinelearning.webp",
+    "items": [
       {
-        category: "CRM para Clínicas e Consultórios",
-        points: [
-          "Gestão de pacientes com histórico detalhado.",
-          "Automação de follow-ups para retornos e fidelização.",
-          "Segmentação de pacientes por tipo de tratamento realizado.",
-        ],
-      },
-    ],
+        "category": "CRM para Negócios e Empreendedores",
+        "points": [
+          "Gerencie leads, clientes e pacientes com um histórico detalhado e centralizado.",
+          "Automação de follow-ups para aumentar engajamento e fidelização.",
+          "Segmentação de contatos para campanhas personalizadas, otimizando conversão."
+        ]
+      }
+    ]
   },
   {
-    title: "Automação para Marketing Médico e Relacionamento com Pacientes",
-    image: "./aicellphone.webp",
-    items: [
+    "title": "Automação para Marketing e Relacionamento",
+    "image": "./aiagentlabel.png",
+    "items": [
       {
-        category: "Instagram",
-        points: [
-          "Respostas automáticas no Direct para dúvidas sobre procedimentos.",
-          "Automação de mensagens para pacientes interessados em tratamentos.",
-          "Campanhas personalizadas para captação de novos pacientes.",
-        ],
+        "category": "Instagram e Redes Sociais",
+        "points": [
+          "Responda mensagens no Direct automaticamente e converta seguidores em clientes.",
+          "Criação de funis automatizados para atrair e converter leads.",
+          "Agendamento automatizado de posts para manter engajamento contínuo."
+        ]
       },
       {
-        category: "E-mail Marketing",
-        points: [
-          "Envio automatizado de e-mails com dicas de saúde e estética.",
-          "Campanhas de fidelização para pacientes antigos.",
-          "Divulgação de novos tratamentos e tecnologias disponíveis na clínica.",
-        ],
+        "category": "E-mail Marketing",
+        "points": [
+          "Mantenha clientes e leads engajados com campanhas automatizadas.",
+          "Criação de estratégias personalizadas para fidelização de clientes e alunos.",
+          "Divulgação de lançamentos e atualizações de forma segmentada."
+        ]
       },
       {
-        category: "Telegram",
-        points: [
-          "Grupos exclusivos para pacientes com dicas e orientações.",
-          "Notificações de campanhas e promoções sazonais.",
-        ],
+        "category": "Telegram e Comunicação Direta",
+        "points": [
+          "Grupos exclusivos no Telegram para mentoria, suporte e fidelização de clientes.",
+          "Automação de notificações sobre lançamentos, campanhas e promoções."
+        ]
       },
       {
-        category: "Prospecção e Captação de Novos Pacientes",
-        points: [
-          "Estratégias automatizadas para atrair novos pacientes via WhatsApp e e-mail.",
-          "Funis de conversão para aumentar a taxa de agendamento.",
-          "Captação de leads qualificados para tratamentos específicos.",
-        ],
-      },
-    ],
+        "category": "Prospecção e Captação de Leads",
+        "points": [
+          "Automação estratégica para atrair novos clientes, pacientes e alunos.",
+          "Funis de conversão inteligentes para maximizar resultados.",
+          "Captação de leads qualificados para produtos digitais, serviços ou consultorias."
+        ]
+      }
+    ]
   },
   {
-    title: "Automação para Lançamentos e Venda de Tratamentos",
-    image: "./aiagentlabel.png",
-    items: [
+    "title": "Automação para Lançamentos e Vendas",
+    "image": "./aicellphone.webp",
+    "items": [
       {
-        category: "Promoções e Campanhas Periódicas",
-        points: [
-          "Sequências automáticas para lançamento de novos serviços.",
-          "Envio de lembretes sobre promoções sazonais (ex.: 'Mês da Saúde Bucal').",
-        ],
+        "category": "Promoções e Campanhas Estratégicas",
+        "points": [
+          "Venda mais com campanhas automatizadas! Notifique clientes e leads sobre novos produtos e serviços.",
+          "Automação de sequências de e-mails e mensagens para lançamentos e ofertas especiais."
+        ]
       },
       {
-        category: "Programas de Fidelização",
-        points: [
-          "Comunicação automatizada para planos recorrentes e pacotes de tratamento.",
-          "Benefícios exclusivos para pacientes que retornam regularmente.",
-        ],
-      },
-    ],
-  },
-];
+        "category": "Programas de Fidelização",
+        "points": [
+          "Transforme clientes eventuais em compradores recorrentes com comunicação automatizada.",
+          "Criação de estratégias exclusivas para retenção de alunos, pacientes e consumidores."
+        ]
+      }
+    ]
+  }
+]
+
+
 
 const ServiceCategory = ({ category, points }: { category: string; points: string[] }) => {
   return (
