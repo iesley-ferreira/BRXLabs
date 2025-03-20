@@ -1,112 +1,109 @@
-const servicesData = 
-[
+const servicesData = [
   {
-    "title": "Automação para Atendimento",
-    "image": "./chatbotia.webp",
-    "items": [
+    title: "Automação para Atendimento",
+    image: "./chatbotia.webp",
+    items: [
       {
-        "category": "WhatsApp",
-        "points": [
+        category: "WhatsApp",
+        points: [
           "Automatize o atendimento no WhatsApp e melhore a comunicação com clientes, pacientes e leads.",
           "Lembretes inteligentes reduzem faltas e aumentam a taxa de conversão em diversos segmentos.",
           "Envio automático de promoções e pacotes personalizados para clientes e alunos.",
           "Funis estratégicos para recuperação de leads, pacientes ou clientes inativos.",
-          "Suporte instantâneo para dúvidas frequentes, reduzindo carga da equipe de atendimento."
-        ]
+          "Suporte instantâneo para dúvidas frequentes, reduzindo carga da equipe de atendimento.",
+        ],
       },
       {
-        "category": "Chatbots e Inteligência Artificial",
-        "points": [
+        category: "Chatbots e Inteligência Artificial",
+        points: [
           "Responda clientes e leads 24h por dia sem esforço. Nossa IA entende e resolve dúvidas rapidamente.",
           "Chatbots inteligentes para agendamento de reuniões, consultas ou suporte técnico.",
-          "Encaminhamento automático de leads para setores específicos, otimizando a conversão e atendimento."
-        ]
+          "Encaminhamento automático de leads para setores específicos, otimizando a conversão e atendimento.",
+        ],
       },
       {
-        "category": "Gerenciamento de Agendamentos",
-        "points": [
+        category: "Gerenciamento de Agendamentos",
+        points: [
           "Confirmação automática de compromissos, sessões ou reuniões para evitar cancelamentos de última hora.",
           "Lembretes estratégicos via WhatsApp, SMS e e-mail para manter clientes e pacientes informados.",
           "Reagendamentos automáticos para otimizar a agenda e evitar horários vagos.",
-          "Gerenciamento inteligente de listas de espera para encaixes e otimização do tempo."
-        ]
-      }
-    ]
+          "Gerenciamento inteligente de listas de espera para encaixes e otimização do tempo.",
+        ],
+      },
+    ],
   },
   {
-    "title": "Automação de Processos Administrativos",
-    "image": "./process.png",
-    "items": [
+    title: "Automação de Processos Administrativos",
+    image: "./process.png",
+    items: [
       {
-        "category": "CRM para Negócios e Empreendedores",
-        "points": [
+        category: "CRM para Negócios e Empreendedores",
+        points: [
           "Gerencie leads, clientes e pacientes com um histórico detalhado e centralizado.",
           "Automação de follow-ups para aumentar engajamento e fidelização.",
-          "Segmentação de contatos para campanhas personalizadas, otimizando conversão."
-        ]
-      }
-    ]
+          "Segmentação de contatos para campanhas personalizadas, otimizando conversão.",
+        ],
+      },
+    ],
   },
   {
-    "title": "Automação para Marketing e Relacionamento",
-    "image": "./aiagentlabel.png",
-    "items": [
+    title: "Automação para Marketing e Relacionamento",
+    image: "./aiagentlabel.png",
+    items: [
       {
-        "category": "Instagram e Redes Sociais",
-        "points": [
+        category: "Instagram e Redes Sociais",
+        points: [
           "Responda mensagens no Direct automaticamente e converta seguidores em clientes.",
           "Criação de funis automatizados para atrair e converter leads.",
-          "Agendamento automatizado de posts para manter engajamento contínuo."
-        ]
+          "Agendamento automatizado de posts para manter engajamento contínuo.",
+        ],
       },
       {
-        "category": "E-mail Marketing",
-        "points": [
+        category: "E-mail Marketing",
+        points: [
           "Mantenha clientes e leads engajados com campanhas automatizadas.",
           "Criação de estratégias personalizadas para fidelização de clientes e alunos.",
-          "Divulgação de lançamentos e atualizações de forma segmentada."
-        ]
+          "Divulgação de lançamentos e atualizações de forma segmentada.",
+        ],
       },
       {
-        "category": "Telegram e Comunicação Direta",
-        "points": [
+        category: "Telegram e Comunicação Direta",
+        points: [
           "Grupos exclusivos no Telegram para mentoria, suporte e fidelização de clientes.",
-          "Automação de notificações sobre lançamentos, campanhas e promoções."
-        ]
+          "Automação de notificações sobre lançamentos, campanhas e promoções.",
+        ],
       },
       {
-        "category": "Prospecção e Captação de Leads",
-        "points": [
+        category: "Prospecção e Captação de Leads",
+        points: [
           "Automação estratégica para atrair novos clientes, pacientes e alunos.",
           "Funis de conversão inteligentes para maximizar resultados.",
-          "Captação de leads qualificados para produtos digitais, serviços ou consultorias."
-        ]
-      }
-    ]
+          "Captação de leads qualificados para produtos digitais, serviços ou consultorias.",
+        ],
+      },
+    ],
   },
   {
-    "title": "Automação para Lançamentos e Vendas",
-    "image": "./aicellphone.webp",
-    "items": [
+    title: "Automação para Lançamentos e Vendas",
+    image: "./aicellphone.webp",
+    items: [
       {
-        "category": "Promoções e Campanhas Estratégicas",
-        "points": [
+        category: "Promoções e Campanhas Estratégicas",
+        points: [
           "Venda mais com campanhas automatizadas! Notifique clientes e leads sobre novos produtos e serviços.",
-          "Automação de sequências de e-mails e mensagens para lançamentos e ofertas especiais."
-        ]
+          "Automação de sequências de e-mails e mensagens para lançamentos e ofertas especiais.",
+        ],
       },
       {
-        "category": "Programas de Fidelização",
-        "points": [
+        category: "Programas de Fidelização",
+        points: [
           "Transforme clientes eventuais em compradores recorrentes com comunicação automatizada.",
-          "Criação de estratégias exclusivas para retenção de alunos, pacientes e consumidores."
-        ]
-      }
-    ]
-  }
-]
-
-
+          "Criação de estratégias exclusivas para retenção de alunos, pacientes e consumidores.",
+        ],
+      },
+    ],
+  },
+];
 
 const ServiceCategory = ({ category, points }: { category: string; points: string[] }) => {
   return (
@@ -169,7 +166,7 @@ const ServicesProvided = () => {
             {/* Imagem ilustrativa */}
             <div className="w-full lg:w-1/2 flex justify-center">
               <div className="service-image w-lg h-96 rounded-3xl">
-              <img
+                <img
                   className="relative top-10 mx-auto w-md h-96 rounded-3xl transform hover:-translate-y-16 transition ease-in-out duration-500"
                   src={service.image}
                   alt={service.title}

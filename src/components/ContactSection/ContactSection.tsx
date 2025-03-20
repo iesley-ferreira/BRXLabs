@@ -87,7 +87,9 @@ const ContactSection = () => {
   return (
     <section className="py-20 bg-[#131313] text-white">
       <div className="container mx-auto px-6 lg:px-20">
-        <h2 className="text-4xl font-bold text-center mb-6">Comece a automatizar hoje mesmo!</h2>
+        <h2 className="text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-zinc-600 leading-tight">
+          Comece a automatizar hoje mesmo!
+        </h2>
         <p className="text-gray-400 text-center mb-10">
           Entre em contato preenchendo o formulário abaixo. Retornaremos o mais rápido possível!
         </p>

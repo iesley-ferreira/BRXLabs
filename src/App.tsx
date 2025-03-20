@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import "./App.css";
 import ContactButton from "./components/ContactButton/ContactButton";
 import ContactSection from "./components/ContactSection/ContactSection";
-import { EmblaCarousel } from "./components/EmblaCarousel/EmblaCarousel";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
-import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
+import Toolbox from "./components/Toolbox/Toolbox";
 
 function App() {
   useEffect(() => {
@@ -31,10 +31,11 @@ function App() {
       <section id="services">
         <ServicesProvided />
       </section>
-      <EmblaCarousel />
+      <Toolbox />
+      {/* <EmblaCarousel /> */}
       {/* <Carousel /> */}
       <section id="metodologia">
-      <HowItWorks />
+        <HowItWorks />
       </section>
       <section id="contact">
         <ContactSection />

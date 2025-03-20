@@ -1,7 +1,10 @@
 .embla {
   /* max-width: 48rem; */
-  background-color: #5655551a;
-  border-radius: 6px;
+  /* background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  border-radius: 6px; */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+    radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
+  background-blend-mode: multiply, multiply;
   /* margin: auto; */
   /* --slide-height: 19rem; */
   /* --slide-spacing: 0.1rem; */
