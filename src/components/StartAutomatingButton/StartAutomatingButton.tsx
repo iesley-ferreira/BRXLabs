@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export default function ContactButton() {
+const StartAutomatingButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -9,26 +9,19 @@ export default function ContactButton() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
 
-  // Detecta se a seção de contato está visível na viewport
   useEffect(() => {
     const contactSection = document.querySelector("#contact");
     if (!contactSection) return;
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsContactVisible(entry.isIntersecting);
-        });
-      },
+      ([entry]) => setIsContactVisible(entry.isIntersecting),
       { threshold: 0.5 },
     );
     observer.observe(contactSection);
     return () => observer.disconnect();
   }, []);
 
-  // Se a seção de contato estiver visível, não renderiza o botão
   if (isContactVisible) return null;
 
-  // Função para formatar o telefone para o padrão (XX) XXXXX-XXXX
   const formatPhone = (value: string): string => {
     const digitsOnly = value.replace(/\D/g, "");
     const hasCountryCode = digitsOnly.startsWith("55");
@@ -54,33 +47,28 @@ export default function ContactButton() {
     return formatted;
   };
 
-  // Atualiza os valores do formulário e aplica formatação no telefone
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "phone") {
-      const formatted = formatPhone(value);
-      setFormData({ ...formData, [name]: formatted });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "phone" ? formatPhone(value) : value,
+    }));
   };
 
-  // Valida os campos do formulário
   const validateForm = () => {
     const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!phoneRegex.test(formData.phone)) {
-      setMessage("Por favor, insira um telefone no formato (XX) XXXXX-XXXX.");
+      setMessage("Insira telefone no formato (XX) XXXXX-XXXX.");
       return false;
     }
     if (!emailRegex.test(formData.email)) {
-      setMessage("Por favor, insira um e-mail válido.");
+      setMessage("Insira um e-mail válido.");
       return false;
     }
     return true;
   };
 
-  // Envio do formulário e exibição da mensagem de sucesso
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -92,7 +80,7 @@ export default function ContactButton() {
     }
 
     try {
-      const response = await fetch(
+      const res = await fetch(
         "https://webhook.brxlabs.com.br/webhook/8968e5f4-9083-4516-9f63-7f359f99f346",
         {
           method: "POST",
@@ -100,14 +88,9 @@ export default function ContactButton() {
           body: JSON.stringify(formData),
         },
       );
-
-      if (!response.ok) {
-        setMessage("Erro ao enviar, tente novamente.");
-      } else {
-        setIsSubmitted(true);
-      }
-    } catch (error) {
-      console.error("Erro ao enviar o formulário:", error);
+      if (!res.ok) setMessage("Erro ao enviar, tente novamente.");
+      else setIsSubmitted(true);
+    } catch {
       setMessage("Erro ao enviar, tente novamente.");
     } finally {
       setLoading(false);
@@ -123,12 +106,18 @@ export default function ContactButton() {
           setMessage("");
           setIsSubmitted(false);
         }}
-        className="fixed top-5/18 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#473ee7] text-[#bebed6f5] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white animate-custom-pulse pulse-element"
+        className="cursor-pointer min-w-[330px] bg-gradient-to-b from-indigo-500 to-indigo-600 shadow-[0px_4px_32px_0_rgba(99,102,241,.70)] px-6 py-3 rounded-xl border-[1px] border-slate-500 text-white font-medium group"
       >
-        Fale Conosco
+        <div className="relative overflow-hidden flex items-center justify-center h-7">
+          <p className="absolute inset-0 flex items-center justify-center transition-transform duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-full">
+            AUTOMATIZE AGORA
+          </p>
+          <p className="absolute inset-0 flex items-center justify-center transition-transform duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover:translate-y-0">
+            FAÇA MAIS COM MENOS
+          </p>
+        </div>
       </button>
 
-      {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 bg-[#1a1a1a96] bg-opacity-50 flex items-center justify-center z-[10000] transition-opacity duration-300 ease-in-out">
           <div className="bg-[#1A1A1A] p-6 rounded-lg shadow-lg w-96 relative">
@@ -218,4 +207,6 @@ export default function ContactButton() {
       )}
     </div>
   );
-}
+};
+
+export default StartAutomatingButton;

@@ -1,9 +1,24 @@
 .embla {
+  position: relative; /* Necessário para posicionar o pseudo-elemento */
   width: 100%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
     radial-gradient(at top center, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.4) 120%) #989898;
   background-blend-mode: multiply, multiply;
-  border-radius: 6px;
+  overflow: hidden; /* Garante que a máscara não ultrapasse os limites */
+}
+
+.embla::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradiente dos lados para o centro: 
+     Inicia com a cor sólida nos extremos e se torna transparente no centro */
+  background: linear-gradient(to right, #131313, transparent 30%, transparent 70%, #131313);
+  border-radius: inherit;
+  pointer-events: none; /* Permite a interação com o conteúdo abaixo */
 }
 .embla__viewport {
   overflow: hidden;
