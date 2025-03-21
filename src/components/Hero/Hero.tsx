@@ -10,10 +10,10 @@ const Hero = () => {
       <p className="text-white font-light text-xl lg:pb-8 md:text-2xl text-center">
         Agilidade e inovação: automações que geram eficiência e performance.
       </p>
-      <div className="card">
+      <div className="card max-w-dvw">
         <div className="loader">
-          <p className="text-3xl">Automatize</p>
-          <div className="words text-3xl">
+          <p className="text-2xl md:text-3xl">Automatize</p>
+          <div className="words text-2xl md:text-3xl">
             <span className="word">Atendimento</span>
             <span className="word">Agendamento</span>
             <span className="word">Planilhas</span>

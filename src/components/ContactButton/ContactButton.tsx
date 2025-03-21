@@ -123,7 +123,7 @@ export default function ContactButton() {
           setMessage("");
           setIsSubmitted(false);
         }}
-        className="fixed top-5/18 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#473ee7] text-[#bebed6f5] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white animate-custom-pulse pulse-element"
+        className="fixed top-4/18 md:top-2/12 right-0 origin-bottom-right -rotate-90 translate-x-0 hover:translate-x-0 z-[9999] cursor-pointer bg-[#473ee7] text-[#bebed6f5] hover:text-white hover:bg-[#5048e5] font-bold text-sm px-4 py-2 h-12 rounded-t-md hover:shadow-[0px_0px_10px_rgba(255,255,255,0.4)] transition-all hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white animate-custom-pulse pulse-element"
       >
         Fale Conosco
       </button>

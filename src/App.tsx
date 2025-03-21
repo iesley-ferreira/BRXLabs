@@ -32,8 +32,6 @@ function App() {
         <ServicesProvided />
       </section>
       <Toolbox />
-      {/* <EmblaCarousel /> */}
-      {/* <Carousel /> */}
       <section id="metodologia">
         <HowItWorks />
       </section>
