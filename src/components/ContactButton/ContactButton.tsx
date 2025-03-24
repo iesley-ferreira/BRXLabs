@@ -67,7 +67,7 @@ export default function ContactButton() {
 
   // Valida os campos do formulário
   const validateForm = () => {
-    const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
+    const phoneRegex = /^(55\s?)?\(\d{2}\) \d{5}-\d{4}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!phoneRegex.test(formData.phone)) {
       setMessage("Por favor, insira um telefone no formato (XX) XXXXX-XXXX.");
