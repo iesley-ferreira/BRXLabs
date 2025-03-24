@@ -56,14 +56,14 @@ const StartAutomatingButton: React.FC = () => {
   };
 
   const validateForm = () => {
-    const phoneRegex = /^\(\d{2}\) \d{5}-\d{4}$/;
+    const phoneRegex = /^(55\s?)?\(\d{2}\) \d{5}-\d{4}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!phoneRegex.test(formData.phone)) {
-      setMessage("Insira telefone no formato (XX) XXXXX-XXXX.");
+      setMessage("Por favor, insira um telefone no formato (XX) XXXXX-XXXX.");
       return false;
     }
     if (!emailRegex.test(formData.email)) {
-      setMessage("Insira um e-mail válido.");
+      setMessage("Por favor, insira um e-mail válido.");
       return false;
     }
     return true;
