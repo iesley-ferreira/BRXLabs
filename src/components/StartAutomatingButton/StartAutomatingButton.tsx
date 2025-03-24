@@ -110,7 +110,7 @@ const StartAutomatingButton: React.FC = () => {
       >
         <div className="relative overflow-hidden flex items-center justify-center h-7">
           <p className="absolute inset-0 flex items-center justify-center transition-transform duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:-translate-y-full">
-            AUTOMATIZE AGORA
+            QUERO AUTOMATIZAR AGORA
           </p>
           <p className="absolute inset-0 flex items-center justify-center transition-transform duration-[1.125s] ease-[cubic-bezier(0.19,1,0.22,1)] translate-y-full group-hover:translate-y-0">
             FAÇA MAIS COM MENOS
