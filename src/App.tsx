@@ -1,46 +1,24 @@
-import AOS from "aos";
-import "aos/dist/aos.css"; // Importa os estilos do AOS
-import { useEffect } from "react";
-import "./App.css";
-import ContactButton from "./components/ContactButton/ContactButton";
-import ContactSection from "./components/ContactSection/ContactSection";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import HowItWorks from "./components/HowItWorks/HowItWorks";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
-import Toolbox from "./components/Toolbox/Toolbox";
+import { Route, Routes } from "react-router-dom";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import ServicoRouter from "./pages/Servicos/ServicoRouter";
+import Dashboard from "./pages/UserDashboard/UserDashboard";
+import AdminRoute from "./routes/AdminRoute";
+// import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1200, // duração da animação em milissegundos
-      once: true, // se true, animação ocorre apenas uma vez
-      easing: "ease-in-out",
-    });
-  }, []);
-
   return (
-    <div className="bg-[#131313] p-4 h-screen">
-      <Header />
-      <section id="home">
-        <Hero />
-      </section>
-      <ContactButton />
-      <section id="services">
-        <ServicesProvided />
-      </section>
-      <Toolbox />
-      <section id="metodologia">
-        <HowItWorks />
-      </section>
-      <section id="contact">
-        <ContactSection />
-      </section>
-      <ScrollToTop />
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/cliente" element={<Dashboard />} />
+      <Route path="/servicos/:path" element={<ServicoRouter />} />
+      <Route element={<AdminRoute />}>
+        <Route path="/admin" element={<AdminDashboard />} />
+      </Route>
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
+    </Routes>
   );
 }
 

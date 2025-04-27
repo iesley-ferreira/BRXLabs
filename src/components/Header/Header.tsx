@@ -5,6 +5,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -59,6 +60,12 @@ const Header = () => {
           <a href="#contact" className="text-white hover:text-gray-300">
             Contato
           </a>
+          <Link
+            to="/login"
+            className="absolute right-[5%] text-[#473ee7] hover:text-[#5048e5] transition hover:scale-105 font-semibold"
+          >
+            Login
+          </Link>
         </div>
 
         {/* Versão mobile: Logo e botão do menu */}
@@ -83,6 +90,13 @@ const Header = () => {
                 <path d="M2260 275 c-19 -22 -2 -48 36 -55 39 -7 30 -26 -11 -22 -40 3 -47 -14 -11 -24 33 -8 57 -2 69 17 16 26 1 49 -33 49 -16 0 -30 5 -30 10 0 6 14 10 31 10 40 0 34 24 -8 28 -18 2 -35 -3 -43 -13z" />
               </g>
             </svg>
+          </div>
+
+          {/* botão de login */}
+          <div>
+            <button className="text-white hover:text-gray-300">
+              <Link to="/login">Login</Link>
+            </button>
           </div>
 
           {/* Botão do menu (sempre à direita) */}
