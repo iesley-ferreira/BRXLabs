@@ -11,7 +11,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     <div className="hidden lg:block relative z-50">
       <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-80 pt-6 pb-8 bg-gray-800 overflow-y-auto">
         <div className="flex w-full items-center px-6 pb-6 mb-6 border-b border-gray-700">
-          <img src="src/assets/minilogo.svg" alt="Logo" className="w-8 h-8 mr-2" />
+          <img src="/src/assets/minilogo.svg" alt="Logo" className="w-8 h-8 mr-2" />
           <span className="text-xl text-white font-semibold">BRX Labs</span>
         </div>
 
