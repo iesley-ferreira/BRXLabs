@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertToast from "../AdminDashboard/Components/AlertToast/AlertToast";
 
 interface MyJwtPayload {
   id: number;
@@ -13,9 +14,12 @@ interface MyJwtPayload {
 export default function Login() {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState("");
-  const navigate = useNavigate();
 
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error" | "info" | "warning">("info");
+
+  const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
 
   const handleLogin = async () => {
@@ -39,22 +43,24 @@ export default function Login() {
           navigate("/cliente");
         }
       } else {
-        setErro("Usuário ou senha incorretos.");
+        showToast("Usuário ou senha incorretos.", "error");
       }
     } catch (err) {
       console.error("Erro ao fazer login:", err);
-      setErro("Erro ao conectar com o servidor.");
+      showToast("Erro ao conectar com o servidor.", "error");
     }
+  };
+
+  const showToast = (message: string, type: "success" | "error" | "info" | "warning" = "info") => {
+    setToastMessage(message);
+    setToastType(type);
+    setToastOpen(true);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1e1e2f] to-[#2a2a40] px-4">
       <div className="bg-[#2f2f42] p-10 rounded-2xl shadow-2xl w-full max-w-md">
         <h2 className="text-3xl font-bold text-white mb-6 text-center">Bem-vindo de volta</h2>
-
-        {erro && (
-          <p className="text-red-400 bg-red-950 p-2 rounded text-sm mb-4 text-center">{erro}</p>
-        )}
 
         <form
           onSubmit={(e) => {
@@ -85,6 +91,14 @@ export default function Login() {
           </button>
         </form>
       </div>
+
+      {/* Toast global de erro */}
+      <AlertToast
+        toastOpen={toastOpen}
+        onClose={() => setToastOpen(false)}
+        type={toastType}
+        message={toastMessage}
+      />
     </div>
   );
 }

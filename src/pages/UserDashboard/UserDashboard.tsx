@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import "../../styles/transitions.css";
-import UserSidebar from "../AdminDashboard/Components/UserSidebar/UserSidebar";
 import Followups from "../Servicos/Followups";
 import BottomBar from "./components/BottomBar/BottomBar";
 import MobileHeader from "./components/MobileHeader/MobileHeader";
+import UserSidebar from "./components/UserSidebar/UserSidebar";
 
 type TokenPayload = {
   id: number;
