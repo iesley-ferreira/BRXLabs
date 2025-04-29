@@ -2,6 +2,7 @@ export type Lead = {
   whatsapp: string;
   nome: string | null;
   follow_up_atual: string | null;
+  atendente?: string;
 };
 
 export type RespostasLead = {
