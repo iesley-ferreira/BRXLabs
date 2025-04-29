@@ -20,6 +20,8 @@ export default function LeadsTable() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
+          console.log(data);
+
           setLeads(data);
         } else {
           console.error("Resposta inválida, esperava array!");
@@ -103,6 +105,12 @@ export default function LeadsTable() {
               <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 WhatsApp
               </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Follow-up
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                Especialista
+              </th>
               <th className="px-6 py-3 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Ações
               </th>
@@ -115,6 +123,12 @@ export default function LeadsTable() {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{lead.nome}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                   {lead.whatsapp}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {lead.follow_up_atual || "—"}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                  {lead.atendente || "—"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap flex gap-3 justify-center">
                   <button
