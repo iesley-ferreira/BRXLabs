@@ -1,4 +1,6 @@
 import React from "react";
+import UserInfoCard from "../../../../components/UserInfoCard/UserInfoCard";
+import { useUserFromToken } from "../../../../hooks/useUserFromToken";
 
 type UserSidebarProps = {
   activeTab: "dashboard" | "servicos" | "personalizados";
@@ -8,13 +10,22 @@ type UserSidebarProps = {
 };
 
 const UserSidebar: React.FC<UserSidebarProps> = ({ activeTab, setActiveTab }) => {
+  const user = useUserFromToken();
   return (
-    <div className="hidden lg:block relative z-50">
-      <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-80 pt-6 pb-8 bg-gray-800 overflow-y-auto">
-        {/* Logo */}
-        <div className="flex w-full items-center px-6 pb-6 mb-6 border-b border-gray-700">
-          <img src="/assets/minilogo.svg" alt="Logo" className="w-8 h-8 mr-2" />
-          <span className="text-xl text-white font-semibold">BRX Labs</span>
+    <div className="hidden lg:w-72 lg:block relative z-50">
+      <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-72 pt-6 pb-8 bg-gray-800 overflow-y-auto">
+        <div className="flex flex-col w-full gap-6 px-6 pb-6 mb-6 border-b border-gray-700">
+          <div className="flex items-center">
+            <img src="public/assets/minilogo.svg" alt="Logo" className="w-8 h-8 mr-2" />
+            <span className="text-xl text-white font-semibold">BRX Labs</span>
+          </div>
+          {user && (
+            <UserInfoCard
+              nome={user.nome}
+              foto={user.foto || `https://i.pravatar.cc/150?u=${user.id}`}
+              status="online"
+            />
+          )}
         </div>
 
         {/* Menu de Usuário */}

@@ -338,12 +338,12 @@ const ServicosList: React.FC<ServicosListProps> = ({ API_URL, token }) => {
         ))}
 
         {showConfirmModal && servicoSelecionado && (
-          <div className="fixed inset-0 flex items-center justify-center bg-[#000000b0]">
-            <div className="bg-white p-6 rounded shadow-md">
-              <p className="mb-4">
+          <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
+            <div className="bg-white p-12 rounded shadow-md border-2 border-[rgba(75,30,133,0.5)]">
+              <p className="mb-12">
                 Tem certeza que deseja excluir o serviço "{servicoSelecionado.nome}"?
               </p>
-              <div className="flex justify-end space-x-4">
+              <div className="flex justify-center space-x-4">
                 <button
                   onClick={handleCancelDelete}
                   className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
@@ -360,108 +360,140 @@ const ServicosList: React.FC<ServicosListProps> = ({ API_URL, token }) => {
             </div>
           </div>
         )}
-
+        {/* Modal de Adicionar Serviço */}
         {showAddModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-[#000000b0]">
-            <div className="bg-white p-6 rounded shadow-md w-96">
-              <h2 className="text-xl font-semibold mb-4">Adicionar Novo Serviço</h2>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Nome do Serviço</label>
-                <input
-                  type="text"
-                  value={newServiceName}
-                  onChange={(e) => setNewServiceName(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                />
+          <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
+            <section className="bg-white rounded-lg shadow-sm p-8 w-[35vw] border-2 border-[rgba(75,30,133,0.5)]">
+              <div className="flex flex-col items-center mb-8">
+                <h2 className="text-2xl font-bold text-[#1e2939] mb-2">Adicionar Novo Serviço</h2>
+                <p className="text-gray-500 mb-4">
+                  Preencha os dados abaixo para cadastrar o serviço
+                </p>
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Descrição</label>
-                <textarea
-                  value={newServiceDescription}
-                  onChange={(e) => setNewServiceDescription(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                ></textarea>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Cliente</label>
-                <select
-                  value={clienteIdSelecionado}
-                  onChange={(e) => setClienteIdSelecionado(e.target.value)}
-                  className="w-full px-3 py-2 border rounded"
-                  required
-                >
-                  <option value="">Selecione um cliente</option>
-                  {clientes.map((cliente) => (
-                    <option key={cliente.id} value={cliente.id}>
-                      {cliente.nome}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 mb-2">Tipo do Serviço</label>
-                <select
-                  value={newServiceType}
-                  onChange={(e) => setNewServiceType(e.target.value as "padrao" | "personalizado")}
-                  className="w-full px-3 py-2 border rounded"
-                >
-                  <option value="padrao">Padrão</option>
-                  <option value="personalizado">Personalizado</option>
-                </select>
-              </div>
-              {clienteIdSelecionado && (
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2">Usuários</label>
-                  <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-gray-200 rounded-lg p-2">
-                    {usuarios.map((usuario) => (
-                      <button
-                        key={usuario.id}
-                        type="button"
-                        onClick={() => handleUsuarioToggle(usuario.id)}
-                        className={`px-3 py-1 border rounded-full text-sm transition focus:outline-none ${
-                          usuariosSelecionados.includes(usuario.id)
-                            ? "bg-indigo-500 text-white border-transparent"
-                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                        }`}
-                      >
-                        {usuario.nome}
-                      </button>
+
+              <form onSubmit={handleAddService} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-[#1e2939]">
+                    Nome do Serviço
+                  </label>
+                  <input
+                    type="text"
+                    value={newServiceName}
+                    onChange={(e) => setNewServiceName(e.target.value)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[#1e2939]">Descrição</label>
+                  <textarea
+                    value={newServiceDescription}
+                    onChange={(e) => setNewServiceDescription(e.target.value)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[#1e2939]">Cliente</label>
+                  <select
+                    value={clienteIdSelecionado}
+                    onChange={(e) => setClienteIdSelecionado(e.target.value)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    required
+                  >
+                    <option value="">Selecione um cliente</option>
+                    {clientes.map((cliente) => (
+                      <option key={cliente.id} value={cliente.id}>
+                        {cliente.nome}
+                      </option>
                     ))}
-                  </div>
+                  </select>
                 </div>
-              )}
-              {usuariosSelecionados.length > 0 && (
-                <div className="mb-4">
-                  <label className="block text-gray-700 mb-2">Usuários Selecionados</label>
-                  <div className="flex flex-wrap gap-2">
-                    {usuarios
-                      .filter((u) => usuariosSelecionados.includes(u.id))
-                      .map((u) => (
-                        <span
-                          key={u.id}
-                          className="inline-flex items-center bg-indigo-100 text-indigo-700 text-sm rounded-full px-3 py-1"
-                        >
-                          {u.nome}
-                        </span>
-                      ))}
-                  </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[#1e2939]">
+                    Tipo do Serviço
+                  </label>
+                  <select
+                    value={newServiceType}
+                    onChange={(e) =>
+                      setNewServiceType(e.target.value as "padrao" | "personalizado")
+                    }
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    required
+                  >
+                    <option value="padrao">Padrão</option>
+                    <option value="personalizado">Personalizado</option>
+                  </select>
                 </div>
-              )}
-              <div className="flex justify-end space-x-4">
-                <button
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                >
-                  Cancelar
-                </button>
-                <button
-                  onClick={handleAddService}
-                  className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                >
-                  Adicionar
-                </button>
-              </div>
-            </div>
+
+                {clienteIdSelecionado && (
+                  <div>
+                    <label className="block text-sm font-medium text-[#1e2939] mb-2">
+                      Usuários
+                    </label>
+                    {usuarios.length > 0 ? (
+                      <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border border-gray-300 rounded-lg p-2">
+                        {usuarios.map((usuario) => (
+                          <button
+                            key={usuario.id}
+                            type="button"
+                            onClick={() => handleUsuarioToggle(usuario.id)}
+                            className={`px-3 py-2 rounded-md text-sm transition ${
+                              usuariosSelecionados.includes(usuario.id)
+                                ? "bg-indigo-500 text-white"
+                                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                            }`}
+                          >
+                            {usuario.nome}
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500 italic">Nenhum usuário disponível</p>
+                    )}
+                  </div>
+                )}
+
+                {usuariosSelecionados.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-medium text-[#1e2939] mb-2">
+                      Usuários Selecionados
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {usuarios
+                        .filter((u) => usuariosSelecionados.includes(u.id))
+                        .map((u) => (
+                          <span
+                            key={u.id}
+                            className="inline-flex items-center bg-indigo-100 text-indigo-700 text-sm rounded-full px-3 py-1"
+                          >
+                            {u.nome}
+                          </span>
+                        ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex flex-wrap gap-4 justify-center mt-6">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="px-6 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 cursor-pointer"
+                  >
+                    Adicionar
+                  </button>
+                </div>
+              </form>
+            </section>
           </div>
         )}
       </div>

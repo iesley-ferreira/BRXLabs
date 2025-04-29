@@ -233,7 +233,7 @@ const UsuariosList: React.FC<UsuariosListProps> = ({ API_URL, token }) => {
       </section>
       {/* Modal de criar usuário */}
       {showModal && (
-        <div className="fixed inset-0 bg-[#000000b0] flex items-center justify-center z-50">
+        <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
           <div onClick={(e) => e.stopPropagation()}>
             <CreateUserModal
               onClose={() => setShowModal(false)}
@@ -310,8 +310,8 @@ const UsuariosList: React.FC<UsuariosListProps> = ({ API_URL, token }) => {
       </div>
       {/* Modal de Ações */}
       {selectedUser && (
-        <div className="fixed inset-0 z-50 bg-[#000000b0] flex items-center justify-center">
-          <section className="bg-white rounded-lg shadow-sm p-8 w-full max-w-[35vw]">
+        <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
+          <section className="bg-white rounded-lg shadow-sm p-8 w-full max-w-[35vw] border-2 border-[rgba(75,30,133,0.5)]">
             <div className="flex flex-col items-center mb-8">
               <img
                 src={

@@ -57,37 +57,3 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
 };
 
 export default MobileHeader;
-
-// type MobileHeaderProps = {
-//   title: string;
-//   onBack: () => void;
-//   onReportIssue?: () => void;
-//   isServicePage?: boolean;
-// };
-
-// const MobileHeader: React.FC<MobileHeaderProps> = ({
-//   title,
-//   onBack,
-//   onReportIssue,
-//   isServicePage,
-// }) => {
-//   return (
-//     <div className="fixed top-0 left-0 right-0 z-50 bg-indigo-600 text-white flex items-center justify-between px-4 py-3 shadow lg:hidden">
-//       <button onClick={onBack} className="text-white text-xl">
-//         <i className="fa-solid fa-arrow-left"></i>
-//       </button>
-
-//       <h2 className="text-lg font-semibold truncate">{title}</h2>
-
-//       {isServicePage && onReportIssue ? (
-//         <button onClick={onReportIssue} className="text-white text-xl">
-//           <i className="fa-solid fa-circle-exclamation"></i>
-//         </button>
-//       ) : (
-//         <div className="w-6" />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default MobileHeader;
