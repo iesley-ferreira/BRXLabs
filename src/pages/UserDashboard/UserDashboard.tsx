@@ -5,6 +5,7 @@ import { CSSTransition, SwitchTransition } from "react-transition-group";
 import "../../styles/transitions.css";
 import Followups from "../Servicos/Followups";
 import BottomBar from "./components/BottomBar/BottomBar";
+import ConteudoDashboardPorCliente from "./components/ConteudoDashboardPorCliente/ConteudoDashboardPorCliente";
 import MobileHeader from "./components/MobileHeader/MobileHeader";
 import UserSidebar from "./components/UserSidebar/UserSidebar";
 
@@ -12,6 +13,7 @@ type TokenPayload = {
   id: number;
   nome: string;
   email: string;
+  cliente: string;
 };
 
 type Servico = {
@@ -32,16 +34,9 @@ export default function Dashboard() {
   const [servicoSelecionado, setServicoSelecionado] = useState<Servico | null>(null);
   const [meuUsuarioId, setMeuUsuarioId] = useState<number | null>(null);
   const [nomeDoUsuario, setNomeDoUsuario] = useState<string>("");
+  const [cliente, setCliente] = useState<string>("");
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const dashboardRef = useRef<HTMLDivElement>(null);
   const servicoRef = useRef<HTMLDivElement>(null);
@@ -54,15 +49,21 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     if (!token) {
       navigate("/login");
       return;
     }
-
     try {
       const decoded = jwtDecode<TokenPayload>(token);
       setMeuUsuarioId(decoded.id);
       setNomeDoUsuario(decoded.nome);
+      setCliente(decoded.cliente);
     } catch (error) {
       console.error("Erro ao decodificar token:", error);
       localStorage.removeItem("token");
@@ -89,30 +90,27 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-
     carregarServicos();
   }, [API_URL, token, navigate]);
 
   useEffect(() => {
     if (!token || !meuUsuarioId) return;
 
-    atualizarStatus(); // chama uma vez
+    const atualizarStatus = () => {
+      fetch(`${API_URL}/webhook/atualizar-status`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ usuario_id: meuUsuarioId }),
+      }).catch((err) => console.error("Erro ao atualizar status:", err));
+    };
 
-    const intervalo = setInterval(atualizarStatus, 60000); // chama a cada 60s
-
+    atualizarStatus(); // inicial
+    const intervalo = setInterval(atualizarStatus, 60000); // atualiza a cada 60s
     return () => clearInterval(intervalo);
   }, [API_URL, token, meuUsuarioId]);
-
-  const atualizarStatus = () => {
-    fetch(`${API_URL}/webhook/atualizar-status`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ usuario_id: meuUsuarioId }),
-    }).catch((err) => console.error("Erro ao atualizar status:", err));
-  };
 
   if (loading) {
     return <div className="text-neutral-600 text-center mt-10">Carregando seus serviços…</div>;
@@ -161,52 +159,48 @@ export default function Dashboard() {
           >
             {servicoSelecionado ? (
               <div ref={servicoRef}>
-                {isMobile ? (
-                  // Versão Mobile (sem título, sem descrição, sem botão)
-                  componentesPorServico[servicoSelecionado.path] ? (
-                    <div className="border rounded bg-gray-100">
-                      {React.createElement(componentesPorServico[servicoSelecionado.path])}
+                <div className="bg-white p-8 rounded shadow mb-6 hidden lg:block">
+                  <div className="w-full flex items-start mb-5 px-3">
+                    <span className="inline-flex justify-center items-center w-16 h-16 min-w-16 min-h-16 mr-4 bg-indigo-500 rounded">
+                      <i className={`fa-solid ${iconePorAba[activeTab]} text-white text-2xl`} />
+                    </span>
+                    <div>
+                      <h2 className="text-2xl font-bold mb-4">{servicoSelecionado.nome}</h2>
+                      <p className="mb-6 text-gray-600 w-2/3">{servicoSelecionado.descricao}</p>
                     </div>
-                  ) : (
-                    <div className="text-gray-500 text-center mt-10">
-                      Serviço ainda não configurado para visualização.
+                    <div className="ml-auto">
+                      <button
+                        onClick={() => setServicoSelecionado(null)}
+                        className="mt-6 w-fit bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-6 rounded"
+                      >
+                        <i className="fa-solid fa-arrow-left text-md mr-2"></i>
+                        Voltar
+                      </button>
                     </div>
-                  )
+                  </div>
+                </div>
+
+                {componentesPorServico[servicoSelecionado.path] ? (
+                  <div className="pt-3">
+                    {React.createElement(componentesPorServico[servicoSelecionado.path])}
+                  </div>
                 ) : (
-                  // Versão Desktop (com título, descrição e botão)
-                  <div className="bg-white p-8 rounded shadow">
-                    <h2 className="text-2xl font-bold mb-4">{servicoSelecionado.nome}</h2>
-                    <p className="mb-6 text-gray-600">{servicoSelecionado.descricao}</p>
-
-                    {componentesPorServico[servicoSelecionado.path] ? (
-                      <div className="border rounded p-6 bg-gray-100">
-                        {React.createElement(componentesPorServico[servicoSelecionado.path])}
-                      </div>
-                    ) : (
-                      <div className="text-gray-500 text-center mt-10">
-                        Serviço ainda não configurado para visualização.
-                      </div>
-                    )}
-
-                    <button
-                      onClick={() => setServicoSelecionado(null)}
-                      className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded"
-                    >
-                      Voltar para serviços
-                    </button>
+                  <div className="text-gray-500 text-center mt-10">
+                    Serviço ainda não configurado para visualização.
                   </div>
                 )}
               </div>
             ) : (
               <div ref={dashboardRef}>
+                {/* Dashboard padrão */}
                 <section className="hidden lg:block py-8 px-6 bg-white mb-8 rounded shadow">
                   <div className="flex flex-wrap -mx-3 items-center">
-                    <div className="w-full lg:w-1/2 flex items-center mb-5 lg:mb-0 px-3">
+                    <div className="w-full lg:w-1/2 flex items-center px-3">
                       <span className="inline-flex justify-center items-center w-16 h-16 min-w-16 min-h-16 mr-4 bg-indigo-500 rounded">
-                        <i className={`fa-solid ${iconePorAba[activeTab]} text-white text-2xl`}></i>
+                        <i className={`fa-solid ${iconePorAba[activeTab]} text-white text-2xl`} />
                       </span>
                       <div>
-                        <h2 className="mb-1 text-2xl font-bold">
+                        <h2 className="text-2xl font-bold">
                           {activeTab === "dashboard"
                             ? "Dashboard"
                             : activeTab === "servicos"
@@ -223,10 +217,9 @@ export default function Dashboard() {
                   </div>
                 </section>
 
+                {/* Cards */}
                 {activeTab === "dashboard" ? (
-                  <div className="text-gray-500 text-center mt-10">
-                    Selecione uma categoria no menu lateral.
-                  </div>
+                  <ConteudoDashboardPorCliente cliente={cliente} apiUrl={API_URL} token={token} />
                 ) : (
                   <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {servicosFiltrados.length === 0 ? (
@@ -248,7 +241,7 @@ export default function Dashboard() {
                           <p className="text-gray-600 text-sm">{servico.descricao}</p>
                           <button
                             onClick={() => setServicoSelecionado(servico)}
-                            className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded transition cursor-pointer"
+                            className="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded transition"
                           >
                             Acessar serviço
                           </button>

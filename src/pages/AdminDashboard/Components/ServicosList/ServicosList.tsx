@@ -338,9 +338,9 @@ const ServicosList: React.FC<ServicosListProps> = ({ API_URL, token }) => {
         ))}
 
         {showConfirmModal && servicoSelecionado && (
-          <div className="fixed inset-0 flex items-center justify-center bg-[#000000b0]">
-            <div className="bg-white p-6 rounded shadow-md">
-              <p className="mb-4">
+          <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
+            <div className="bg-white p-12 rounded shadow-md border-2 border-[rgba(75,30,133,0.5)]">
+              <p className="mb-12">
                 Tem certeza que deseja excluir o serviço "{servicoSelecionado.nome}"?
               </p>
               <div className="flex justify-center space-x-4">
@@ -362,8 +362,8 @@ const ServicosList: React.FC<ServicosListProps> = ({ API_URL, token }) => {
         )}
         {/* Modal de Adicionar Serviço */}
         {showAddModal && (
-          <div className="fixed inset-0 bg-[#000000b0] flex items-center justify-center z-50">
-            <section className="bg-white rounded-lg shadow-sm p-8 w-[35vw]">
+          <div className="fixed top-0 right-0 bottom-0 left-72 bg-[#000000b0] flex items-center justify-center z-[999]">
+            <section className="bg-white rounded-lg shadow-sm p-8 w-[35vw] border-2 border-[rgba(75,30,133,0.5)]">
               <div className="flex flex-col items-center mb-8">
                 <h2 className="text-2xl font-bold text-[#1e2939] mb-2">Adicionar Novo Serviço</h2>
                 <p className="text-gray-500 mb-4">

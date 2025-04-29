@@ -20,8 +20,6 @@ export function useUserFromToken() {
 
     try {
       const decoded = jwtDecode<TokenPayload>(token);
-      console.log(decoded);
-
       setUser(decoded);
     } catch (error) {
       console.error("Erro ao decodificar token:", error);

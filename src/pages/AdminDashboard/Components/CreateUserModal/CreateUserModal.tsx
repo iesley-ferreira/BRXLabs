@@ -146,7 +146,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
 
   return (
     <>
-      <section className="bg-white rounded-lg shadow-sm p-8 w-[35vw]">
+      <section className="bg-white rounded-lg shadow-sm p-8 w-[35vw] border-2 border-[rgba(75,30,133,0.5)]">
         <div className="flex flex-col items-center mb-8">
           <h2 className="text-2xl font-bold text-[#1e2939] mb-2">Criar Novo Usuário</h2>
           <p className="text-gray-500 mb-4">Preencha os dados abaixo para cadastrar</p>
