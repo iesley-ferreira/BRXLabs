@@ -1,0 +1,19 @@
+.chats-aside::-webkit-scrollbar {
+  width: 6px;
+}
+.chats-aside::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 999px;
+}
+
+.chat-message.ai {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+}
+
+.chat-message.human {
+  background-color: #6366f1;
+  color: white;
+  border-radius: 1rem;
+}
