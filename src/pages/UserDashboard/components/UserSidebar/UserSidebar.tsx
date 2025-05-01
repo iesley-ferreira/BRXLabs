@@ -3,7 +3,7 @@ import UserInfoCard from "../../../../components/UserInfoCard/UserInfoCard";
 import { useUserFromToken } from "../../../../hooks/useUserFromToken";
 
 type UserSidebarProps = {
-  activeTab: "dashboard" | "servicos" | "personalizados";
+  activeTab: "dashboard" | "servicos" | "personalizados" | "chats";
   setActiveTab: (tab: UserSidebarProps["activeTab"]) => void;
   userName: string;
   userPhoto?: string;
@@ -82,6 +82,22 @@ const UserSidebar: React.FC<UserSidebarProps> = ({ activeTab, setActiveTab }) =>
                   }`}
                 />
                 <span>Serviços Personalizados</span>
+              </li>
+              {/* Chats */}
+              <li
+                className={`flex items-center p-3 rounded cursor-pointer ${
+                  activeTab === "chats"
+                    ? "bg-indigo-500 text-white"
+                    : "text-gray-50 hover:bg-gray-900"
+                }`}
+                onClick={() => setActiveTab("chats")}
+              >
+                <i
+                  className={`fa-solid fa-comments mr-3 text-lg ${
+                    activeTab === "chats" ? "text-white" : "text-gray-400"
+                  }`}
+                />
+                <span>Chats</span>
               </li>
             </ul>
           </div>
