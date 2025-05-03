@@ -47,9 +47,16 @@ export default function LeadsTable() {
 
       const data = await res.json();
 
-      if (Array.isArray(data) && (data.length === 0 || Object.keys(data[0]).length === 0)) {
-        setToastType("info");
-        setToastMessage("Este lead ainda não respondeu.");
+      // Campos que representam as perguntas que queremos validar
+      const camposDeRespostas = ["ramo", "colaboradores", "faturamento", "desafio"];
+
+      const respondeuAlguma = camposDeRespostas.some(
+        (campo) => data[campo] !== null && data[campo] !== "" && data[campo] !== undefined,
+      );
+
+      if (!respondeuAlguma) {
+        setToastType("warning");
+        setToastMessage("Este lead ainda não respondeu nenhuma pergunta.");
         setToastOpen(true);
         return;
       }
@@ -75,8 +82,12 @@ export default function LeadsTable() {
 
       const data = await res.json();
 
-      if (!Array.isArray(data) || data.length === 0) {
-        setToastType("info");
+      if (
+        !Array.isArray(data) ||
+        data.length === 0 ||
+        data.every((item) => Object.keys(item).length === 0)
+      ) {
+        setToastType("warning");
         setToastMessage("Nenhum histórico de conversa encontrado para este lead.");
         setToastOpen(true);
         return;
@@ -141,7 +152,7 @@ export default function LeadsTable() {
                     className="flex items-center gap-2 bg-green-100 hover:bg-green-200 text-green-700 text-xs font-semibold px-3 py-2 rounded-full transition"
                     onClick={() => handleOpenHistorico(lead.whatsapp)}
                   >
-                    <i className="fa-solid fa-phone text-sm"></i> Histórico
+                    <i className="fa-solid fa-comments text-sm"></i> Histórico
                   </button>
                 </td>
               </tr>

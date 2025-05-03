@@ -198,7 +198,7 @@ export default function Dashboard() {
                 {activeTab === "dashboard" ? (
                   <>
                     <section className="hidden lg:block py-8 px-6 bg-white mb-8 rounded shadow">
-                      <div className="flex flex-wrap -mx-3 items-center">
+                      <div className="flex flex-wrap -mx-3 items-center p-8">
                         <div className="w-full lg:w-1/2 flex items-center px-3">
                           <span className="inline-flex justify-center items-center w-16 h-16 min-w-16 min-h-16 mr-4 bg-indigo-500 rounded">
                             <i
@@ -220,7 +220,7 @@ export default function Dashboard() {
                 ) : activeTab === "chats" ? (
                   <Chats /> // ✅ RENDERIZAÇÃO DE CHATS
                 ) : (
-                  <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
                     {servicosFiltrados.length === 0 ? (
                       <p className="text-gray-500 col-span-full text-center mt-10">
                         Nenhum serviço disponível.

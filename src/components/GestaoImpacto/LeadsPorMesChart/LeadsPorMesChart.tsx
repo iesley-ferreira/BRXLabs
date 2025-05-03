@@ -50,7 +50,7 @@ const LeadsPorMesChart = () => {
               borderRadius: 5,
             },
             {
-              label: "Atendimentos",
+              label: "Atenderam a ligação do comercial",
               data: atendidos,
               backgroundColor: "#10b981", // verde
               borderRadius: 5,
@@ -66,17 +66,19 @@ const LeadsPorMesChart = () => {
       legend: {
         position: "top" as const,
       },
-      title: {
-        display: true,
-        text: "Leads por Mês e Atendimentos",
-      },
     },
   };
 
   return (
-    <div className="bg-white p-6 h-[600px] rounded shadow mt-6">
-      <h2 className="text-xl font-bold text-indigo-700 mb-4">Leads por Mês</h2>
-      {chartData && <Bar data={chartData} options={chartOptions} key={JSON.stringify(chartData)} />}
+    <div className="bg-white p-6 rounded-lg w-full h-auto shadow mt-6 max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold text-indigo-700 mb-4 text-center">
+        Leads por Mês e Atendimentos
+      </h2>
+      {chartData && (
+        <div className="w-full min-h-96">
+          <Bar data={chartData} options={chartOptions} key={JSON.stringify(chartData)} />
+        </div>
+      )}
     </div>
   );
 };

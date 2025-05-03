@@ -13,7 +13,7 @@ const ConteudoDashboardPorCliente: React.FC<Props> = ({ cliente }: { cliente: st
   if (cliente === "Gestão Impacto") {
     return (
       <>
-        <div className="grid grid-cols-2 gap-4 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-10">
           <LeadsPorMesChart />
           <LeadsPorCategoriaChart />
         </div>

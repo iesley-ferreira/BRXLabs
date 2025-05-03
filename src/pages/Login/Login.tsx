@@ -33,7 +33,7 @@ export default function Login() {
       const [data] = await res.json();
 
       if (data.success) {
-        const token = data.token.replace(/\n/g, "");
+        const token = data.token.trim();
         localStorage.setItem("token", token);
 
         const decoded = jwtDecode<MyJwtPayload>(token);
@@ -72,6 +72,7 @@ export default function Login() {
           <input
             type="text"
             placeholder="Usuário"
+            autoComplete="username"
             value={usuario}
             onChange={(e) => setUsuario(e.target.value)}
             className="w-full px-4 py-3 rounded-md bg-[#1e1e2e] text-white border border-transparent focus:border-[#473ee7] focus:outline-none transition"
@@ -79,13 +80,15 @@ export default function Login() {
           <input
             type="password"
             placeholder="Senha"
+            autoComplete="current-password"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
             className="w-full px-4 py-3 rounded-md bg-[#1e1e2e] text-white border border-transparent focus:border-[#473ee7] focus:outline-none transition"
           />
           <button
             type="submit"
-            className="w-full bg-[#473ee7] hover:bg-[#372fe2] transition-colors py-3 rounded-md text-white font-semibold tracking-wide"
+            disabled={!usuario || !senha}
+            className="w-full bg-[#473ee7] hover:bg-[#372fe2] transition-colors py-3 rounded-md text-white font-semibold tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Entrar
           </button>

@@ -1,8 +1,18 @@
-import { ArcElement, Chart as ChartJS, Colors, Legend, Tooltip, TooltipItem } from "chart.js";
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Colors,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+  TooltipItem,
+} from "chart.js";
 import { useEffect, useState } from "react";
-import { Pie } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, Tooltip, Legend, Colors);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend, Colors);
 
 type CategoriaItem = {
   categoria: string;
@@ -22,26 +32,17 @@ export default function LeadsPorCategoriaChart() {
       .catch((err) => console.error("Erro ao buscar categorias:", err));
   }, []);
 
-  const totalLeads = dados.reduce((sum, item) => sum + item.total, 0);
+  const dadosOrdenados = [...dados].sort((a, b) => b.total - a.total); // ordena decrescente
 
   const chartData = {
-    labels: dados.map((item) => item.categoria),
+    labels: dadosOrdenados.map((item) => item.categoria),
     datasets: [
       {
         label: "Leads por Categoria",
-        data: dados.map((item) => item.total),
-        backgroundColor: [
-          "#6366f1", // indigo
-          "#10b981", // green
-          "#3b82f6", // blue
-          "#8b5cf6", // purple
-          "#9333ea", // deep purple
-          "#ec4899", // pink
-          "#14b8a6", // teal
-          "#f59e0b", // amber
-        ],
-        borderColor: "#f9fafb",
-        borderWidth: 2,
+        data: dadosOrdenados.map((item) => item.total),
+        backgroundColor: "#6366f1",
+        borderRadius: 6,
+        barThickness: 40,
       },
     ],
   };
@@ -50,46 +51,53 @@ export default function LeadsPorCategoriaChart() {
     responsive: true,
     plugins: {
       legend: {
-        position: "right" as const,
-        labels: {
-          color: "#1f2937", // neutral-800
-          font: {
-            size: 13,
-            family: "Inter, sans-serif",
-            weight: "normal" as const,
-          },
-          padding: 15,
-        },
+        display: false,
       },
       tooltip: {
         callbacks: {
-          label: function (context: TooltipItem<"pie">) {
+          label: function (context: TooltipItem<"bar">) {
             const value = context.raw as number;
-            const percent = ((value / totalLeads) * 100).toFixed(1);
-            return `${context.label}: ${value} leads (${percent}%)`;
+
+            return `${value} Leads`;
           },
         },
       },
-      title: {
-        display: true,
-        text: "Leads por Categoria",
-        color: "#432dd7", // Indigo-900
-        font: {
-          size: 20,
-          family: "Inter, sans-serif",
-          weight: "bold" as const,
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#1f2937", // texto do eixo x
+          font: {
+            family: "Inter, sans-serif",
+            size: 13,
+          },
         },
-        padding: {
-          top: 10,
-          bottom: 20,
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: "#1f2937",
+          font: {
+            family: "Inter, sans-serif",
+            size: 13,
+          },
+        },
+        grid: {
+          color: "#e5e7eb", // gray-200
         },
       },
     },
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg w-[100%] h-[600px] shadow mt-6 max-w-3xl mx-auto">
-      <Pie data={chartData} options={chartOptions} />
+    <div className="bg-white p-6 rounded-lg w-full h-auto shadow mt-6 max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold text-indigo-700 mb-4 text-center">Leads por Categoria</h2>
+      <div className="w-full min-h-96">
+        <Bar data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 }
