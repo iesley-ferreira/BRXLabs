@@ -319,7 +319,7 @@ import { Conversa } from "../Chats"; // Ajuste o caminho se necessário
 // Importar os tipos necessários, que podem estar em chatService ou definidos aqui
 import { LeadDetailsData, TagGlobal } from "../chatService"; // Ajuste o caminho se necessário
 
-// --- Componente LeadInfoPanel (Corrigido para Processar Resposta da API) ---
+// --- Componente LeadInfoPanel (Tipo fetchLeadDetails Corrigido) ---
 
 interface LeadInfoPanelProps {
   lead: Conversa | null;
@@ -329,7 +329,8 @@ interface LeadInfoPanelProps {
   onAddTagToLead: (leadId: string, tagId: string) => Promise<void>;
   onRemoveTagFromLead: (leadId: string, tagId: string) => Promise<void>;
   onCreateNewTag: (nome: string, cor: string) => Promise<TagGlobal | null>;
-  fetchLeadDetails: (leadId: string) => Promise<LeadDetailsData[]>; // Espera um array
+  // --- CORREÇÃO AQUI: Espera Promise<LeadDetailsData> (objeto único) ---
+  fetchLeadDetails: (leadId: string) => Promise<LeadDetailsData>;
   fetchAvailableTags: () => Promise<TagGlobal[]>;
 }
 
@@ -386,21 +387,20 @@ const LeadInfoPanel: React.FC<LeadInfoPanelProps> = ({
 
     try {
       console.log(`[LeadInfoPanel] Buscando detalhes para lead ID: ${lead.id}`);
-      const [responseData, tagsGlobais] = await Promise.all([
-        fetchLeadDetails(lead.id),
+      // Busca os dados (API retorna objeto) e as tags globais
+      const [rawDetailsObject, tagsGlobais] = await Promise.all([
+        fetchLeadDetails(lead.id), // Agora espera um objeto: LeadDetailsData
         fetchAvailableTags(),
       ]);
       console.log(
-        "[LeadInfoPanel] Resposta bruta recebida (fetchLeadDetails):",
-        JSON.stringify(responseData),
+        "[LeadInfoPanel] Objeto de detalhes brutos recebido:",
+        JSON.stringify(rawDetailsObject),
       );
       console.log("[LeadInfoPanel] Tags globais recebidas:", tagsGlobais);
 
-      // Pega o primeiro objeto do array retornado pela API
-      const rawDetailsObject = responseData && responseData.length > 0 ? responseData[0] : null;
-
+      // --- CORREÇÃO AQUI: Não precisa mais aceder a responseData[0] ---
       if (!rawDetailsObject) {
-        console.warn("[LeadInfoPanel] API fetchLeadDetails retornou array vazio ou null.");
+        console.warn("[LeadInfoPanel] API fetchLeadDetails retornou null ou undefined.");
         setError("Dados do lead não encontrados.");
         setLeadDetails(null);
         setAvailableTags(tagsGlobais || []);
@@ -408,6 +408,7 @@ const LeadInfoPanel: React.FC<LeadInfoPanelProps> = ({
         setIsLoading(false);
         return;
       }
+      // --- FIM DA CORREÇÃO ---
 
       let parsedTags: TagGlobal[] = [];
       let processingError = null;
@@ -453,22 +454,17 @@ const LeadInfoPanel: React.FC<LeadInfoPanelProps> = ({
 
       // Atualização do Estado
       if (!processingError) {
-        // --- CORREÇÃO AQUI: Montar o objeto corretamente ---
-        // Cria o objeto final combinando as propriedades do objeto recebido
-        // com o array de tags processado.
+        // Monta o objeto final usando diretamente rawDetailsObject
         const processedDetails: ParsedLeadDetails = {
-          id: rawDetailsObject.id || lead.id, // Usa o ID do objeto ou do lead original
-          nota: rawDetailsObject.nota || "", // Usa a nota do objeto ou string vazia
-          tags: parsedTags, // Usa as tags que foram processadas (garantido ser array)
-          // Adicione outras propriedades de rawDetailsObject se necessário:
-          // nome: rawDetailsObject.nome || lead.nome, // Exemplo
-          // ... outras propriedades ...
+          id: rawDetailsObject.id || lead.id,
+          nota: rawDetailsObject.nota || "",
+          tags: parsedTags,
+          // Copie outras propriedades se necessário
         };
-        // --- FIM DA CORREÇÃO ---
 
         console.log("[LeadInfoPanel] Detalhes processados:", processedDetails);
-        setLeadDetails(processedDetails); // Define o estado com o objeto correto
-        setNotaEditavel(processedDetails.nota); // Define a nota editável
+        setLeadDetails(processedDetails);
+        setNotaEditavel(processedDetails.nota);
         console.log(`[LeadInfoPanel] Nota definida para: "${processedDetails.nota}"`);
 
         const leadTagIds = processedDetails.tags.map((t) => t.id);
@@ -783,6 +779,4 @@ const LeadInfoPanel: React.FC<LeadInfoPanelProps> = ({
   );
 };
 
-// Se este componente estiver em seu próprio arquivo (ex: LeadInfoPanel.tsx),
-// adicione a linha abaixo no final do arquivo:
 export default LeadInfoPanel;

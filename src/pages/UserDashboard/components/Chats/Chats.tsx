@@ -463,7 +463,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   addTagToLead,
   createNewTag,
-  enviarMensagem,
+  // enviarMensagem,
   fetchAvailableTags, // Importar se LeadInfoPanel precisar buscar tags aqui
   fetchLeadDetails, // Importar se LeadInfoPanel precisar buscar detalhes aqui
   getConversasRecentes,
@@ -604,17 +604,17 @@ const Chats: React.FC = () => {
     };
     setMensagens((prevMensagens) => [...prevMensagens, novaMensagemUsuario]);
 
-    try {
-      await enviarMensagem(conversaAtiva.id, mensagemParaEnviar);
-      const historicoAtualizado = await getHistoricoConversa(conversaAtiva.id);
-      setMensagens(historicoAtualizado);
-      await carregarConversas(); // Atualiza lista de conversas
-    } catch (error) {
-      console.error("Erro ao enviar mensagem:", error);
-      // Adicionar feedback de erro para o usuário se necessário
-      setMensagens((prevMensagens) => prevMensagens.filter((m) => m.id !== novaMensagemUsuario.id));
-      setMensagemInput(mensagemParaEnviar);
-    }
+    // try {
+    //   await enviarMensagem(conversaAtiva.id, mensagemParaEnviar);
+    //   const historicoAtualizado = await getHistoricoConversa(conversaAtiva.id);
+    //   setMensagens(historicoAtualizado);
+    //   await carregarConversas(); // Atualiza lista de conversas
+    // } catch (error) {
+    //   console.error("Erro ao enviar mensagem:", error);
+    //   // Adicionar feedback de erro para o usuário se necessário
+    //   setMensagens((prevMensagens) => prevMensagens.filter((m) => m.id !== novaMensagemUsuario.id));
+    //   setMensagemInput(mensagemParaEnviar);
+    // }
   };
 
   useEffect(() => {

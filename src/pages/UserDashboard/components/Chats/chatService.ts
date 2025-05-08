@@ -212,29 +212,29 @@ export const getHistoricoConversa = async (sessionId: string): Promise<Mensagem[
 /**
  * Envia uma nova mensagem para uma conversa.
  */
-export const enviarMensagem = async (sessionId: string, mensagem: string): Promise<any> => {
-  // Confirme se o endpoint e o corpo da requisição estão corretos
-  const res = await fetch(`${API_URL}/webhook/gi/enviar-mensagem`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      session_id: sessionId, // Garanta que o backend espera 'session_id' (que é o whatsapp)
-      content: mensagem,
-      // O backend deve inferir o 'type' como 'human' ou 'user' para esta mensagem enviada
-    }),
-  });
+// export const enviarMensagem = async (sessionId: string, mensagem: string): Promise<any> => {
+//   // Confirme se o endpoint e o corpo da requisição estão corretos
+//   const res = await fetch(`${API_URL}/webhook/gi/enviar-mensagem`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify({
+//       session_id: sessionId, // Garanta que o backend espera 'session_id' (que é o whatsapp)
+//       content: mensagem,
+//       // O backend deve inferir o 'type' como 'human' ou 'user' para esta mensagem enviada
+//     }),
+//   });
 
-  if (!res.ok) {
-    console.error("Erro ao enviar mensagem:", res.status, await res.text());
-    throw new Error("Falha ao enviar mensagem");
-  }
+//   if (!res.ok) {
+//     console.error("Erro ao enviar mensagem:", res.status, await res.text());
+//     throw new Error("Falha ao enviar mensagem");
+//   }
 
-  const data = await res.json();
-  return data; // Retorna a resposta do backend (pode conter a mensagem criada, etc.)
-};
+//   const data = await res.json();
+//   return data; // Retorna a resposta do backend (pode conter a mensagem criada, etc.)
+// };
 
 // --- Novas Funções para o Painel de Informações do Lead ---
 
