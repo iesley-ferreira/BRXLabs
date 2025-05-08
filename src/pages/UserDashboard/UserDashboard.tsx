@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<Aba>("dashboard");
   const [servicoSelecionado, setServicoSelecionado] = useState<Servico | null>(null);
-  const [meuUsuarioId, setMeuUsuarioId] = useState<number | null>(null);
+  // const [meuUsuarioId, setMeuUsuarioId] = useState<number | null>(null);
   const [nomeDoUsuario, setNomeDoUsuario] = useState<string>("");
   const [cliente, setCliente] = useState<string>("");
 
@@ -62,7 +62,7 @@ export default function Dashboard() {
     }
     try {
       const decoded = jwtDecode<TokenPayload>(token);
-      setMeuUsuarioId(decoded.id);
+      // setMeuUsuarioId(decoded.id);
       setNomeDoUsuario(decoded.nome);
       setCliente(decoded.cliente);
     } catch (error) {
@@ -94,24 +94,24 @@ export default function Dashboard() {
     carregarServicos();
   }, [API_URL, token, navigate]);
 
-  useEffect(() => {
-    if (!token || !meuUsuarioId) return;
+  // useEffect(() => {
+  //   if (!token || !meuUsuarioId) return;
 
-    const atualizarStatus = () => {
-      fetch(`${API_URL}/webhook/atualizar-status`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ usuario_id: meuUsuarioId }),
-      }).catch((err) => console.error("Erro ao atualizar status:", err));
-    };
+  //   const atualizarStatus = () => {
+  //     fetch(`${API_URL}/webhook/atualizar-status`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ usuario_id: meuUsuarioId }),
+  //     }).catch((err) => console.error("Erro ao atualizar status:", err));
+  //   };
 
-    atualizarStatus();
-    const intervalo = setInterval(atualizarStatus, 60000);
-    return () => clearInterval(intervalo);
-  }, [API_URL, token, meuUsuarioId]);
+  //   atualizarStatus();
+  //   const intervalo = setInterval(atualizarStatus, 60000);
+  //   return () => clearInterval(intervalo);
+  // }, [API_URL, token, meuUsuarioId]);
 
   if (loading) {
     return <div className="text-neutral-600 text-center mt-10">Carregando seus serviços…</div>;
