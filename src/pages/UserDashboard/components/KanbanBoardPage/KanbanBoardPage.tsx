@@ -271,7 +271,7 @@ const KanbanBoardPage: React.FC = () => {
   return (
     <div className="flex flex-col h-full bg-slate-100 p-4 md:p-6 overflow-hidden">
       <div className="flex justify-between items-center mb-6 flex-shrink-0">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Quadro de Leads</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Funil de Vendas</h1>
         <div className="flex items-center gap-2">
           <button
             onClick={loadBoardData}
