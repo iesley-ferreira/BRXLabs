@@ -1,7 +1,7 @@
 import React from "react";
 
 type MobileHeaderProps = {
-  activeTab: "dashboard" | "servicos" | "personalizados" | "chats";
+  activeTab: "dashboard" | "servicos" | "personalizados" | "chats" | "kanban";
   servicoSelecionado: { nome: string } | null;
   onBack: () => void;
   onReport?: () => void; // opção para botão de reportar

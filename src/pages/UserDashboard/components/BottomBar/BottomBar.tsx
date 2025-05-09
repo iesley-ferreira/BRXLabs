@@ -1,7 +1,7 @@
 import React from "react";
 
 type BottomBarProps = {
-  activeTab: "dashboard" | "servicos" | "personalizados" | "chats";
+  activeTab: "dashboard" | "servicos" | "personalizados" | "chats" | "kanban";
   setActiveTab: (tab: "dashboard" | "servicos" | "personalizados") => void;
 };
 
