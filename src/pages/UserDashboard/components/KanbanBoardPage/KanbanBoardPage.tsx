@@ -1,4 +1,5 @@
 import {
+  closestCenter,
   DndContext,
   DragEndEvent,
   DragOverEvent,
@@ -6,14 +7,13 @@ import {
   KeyboardSensor,
   PointerSensor,
   UniqueIdentifier,
-  closestCorners,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import {
-  SortableContext,
   arrayMove,
   horizontalListSortingStrategy,
+  SortableContext,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { PlusCircle, RefreshCw } from "lucide-react";
@@ -290,7 +290,7 @@ const KanbanBoardPage: React.FC = () => {
       </div>
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCorners}
+        collisionDetection={closestCenter}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}

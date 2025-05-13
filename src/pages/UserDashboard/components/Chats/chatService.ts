@@ -1,99 +1,8 @@
-// import { Mensagem } from "./Chats";
-
-// const API_URL = import.meta.env.VITE_API_URL;
-// const token = localStorage.getItem("token") || "";
-
-// type Conversa = {
-//   id: string; // pode ser o session_id
-//   nome: string; // lead_nome
-//   telefone: string; // session_id
-//   ultimaMensagem: string; // message.content
-//   atualizadoEm: string; // created_at
-//   remetenteUltimaMensagem: "bot" | "user";
-// };
-
-// interface MensagemBruta {
-//   content: string;
-//   type: "ai" | "user";
-//   created_at: string;
-// }
-
-// export async function getConversasRecentes(): Promise<Conversa[]> {
-//   const res = await fetch(`${API_URL}/webhook/gi/conversas-recentes`);
-//   const data = await res.json();
-
-//   const conversasMap = new Map<string, Conversa>();
-
-//   for (const item of data) {
-//     const id = item.session_id;
-//     const nome = item.lead_nome || "Desconhecido";
-//     const telefone = item.session_id;
-//     const remetenteUltimaMensagem = item.message?.type === "ai" ? "bot" : "user";
-//     const ultimaMensagem = item.message?.content || "";
-//     const atualizadoEm = item.created_at;
-
-//     // só atualiza se for mais nova
-//     if (
-//       !conversasMap.has(id) ||
-//       new Date(atualizadoEm) > new Date(conversasMap.get(id)!.atualizadoEm)
-//     ) {
-//       conversasMap.set(id, {
-//         id,
-//         nome,
-//         telefone,
-//         ultimaMensagem,
-//         remetenteUltimaMensagem,
-//         atualizadoEm,
-//       });
-//     }
-//   }
-
-//   return Array.from(conversasMap.values()).sort(
-//     (a, b) => new Date(b.atualizadoEm).getTime() - new Date(a.atualizadoEm).getTime(),
-//   );
-// }
-
-// export const getHistoricoConversa = async (sessionId: string) => {
-//   const res = await fetch(`${API_URL}/webhook/gi/leads-historico2?whatsapp=${sessionId}`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-//   const data: MensagemBruta[] = await res.json();
-//   return data.map(
-//     (item): Mensagem => ({
-//       id: crypto.randomUUID(), // ou item.id, se existir no backend
-//       content: item.content,
-//       sender: item.type === "ai" ? "bot" : "user",
-//       timestamp: item.created_at,
-//     }),
-//   );
-// };
-
-// export const enviarMensagem = async (sessionId: string, mensagem: string) => {
-//   const res = await fetch(`${API_URL}/webhook/gi/enviar-mensagem`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify({
-//       session_id: sessionId,
-//       content: mensagem,
-//     }),
-//   });
-
-//   const data = await res.json();
-//   return data;
-// };
-import { Mensagem } from "./Chats"; // Assume que Chats.tsx exporta o tipo Mensagem
-
-const API_URL = import.meta.env.VITE_API_URL; // Certifique-se que esta variável de ambiente está configurada
-const token = localStorage.getItem("token") || ""; // Ou sua lógica de autenticação
+const API_URL = import.meta.env.VITE_API_URL;
+const token = localStorage.getItem("token") || "";
 
 // --- Tipos Esperados do Backend (Ajuste conforme sua API) ---
 
-// Tipo para a resposta da lista de conversas recentes
 interface ConversaRecenteRaw {
   lead_whatsapp: string; // Corresponde a leads.whatsapp
   lead_nome: string; // Corresponde a leads.nome
@@ -103,29 +12,18 @@ interface ConversaRecenteRaw {
   // Adicione outras informações do lead se necessário (ex: atendente, nota_geral)
 }
 
-// Tipo para o histórico de mensagens (parece ok, mas confirmando)
-interface MensagemBruta {
-  id?: string; // Opcional, se o backend retornar um ID para a mensagem
-  content: string;
-  type: "ai" | "human"; // 'user' no frontend é mapeado de 'human'
-  created_at: string;
-}
-
-// Tipo para detalhes do lead (para o painel lateral)
 export interface LeadDetailsData {
   id: string; // O whatsapp do lead
   nota: string; // nota_geral da tabela leads
   tags: Array<{ id: string; nome: string; cor: string }>; // Tags associadas da tabela lead_tags JOIN tags
 }
 
-// Tipo para tags globais
 export interface TagGlobal {
   id: string; // id da tabela tags
   nome: string;
   cor: string;
 }
 
-// Tipo para o frontend (definido no seu Chats.tsx, mas repetido aqui para clareza)
 export type Conversa = {
   id: string; // Mapeado de lead_whatsapp
   nome: string; // Mapeado de lead_nome
@@ -181,33 +79,33 @@ export async function getConversasRecentes(): Promise<Conversa[]> {
 }
 
 /**
- * Busca o histórico de mensagens de uma conversa específica.
+ * Busca o histórico de mensagens de uma conversa específica da tabela chat_histories.
  */
-export const getHistoricoConversa = async (sessionId: string): Promise<Mensagem[]> => {
-  // O endpoint parece ok, mas confirme se o parâmetro é 'whatsapp' ou 'session_id'
-  const res = await fetch(`${API_URL}/webhook/gi/leads-historico2?whatsapp=${sessionId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+// export const getHistoricoConversa = async (sessionId: string): Promise<Mensagem[]> => {
+//   // O endpoint parece ok, mas confirme se o parâmetro é 'whatsapp' ou 'session_id'
+//   const res = await fetch(`${API_URL}/webhook/gi/leads-historico2?whatsapp=${sessionId}`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-  if (!res.ok) {
-    console.error("Erro ao buscar histórico:", res.status, await res.text());
-    throw new Error("Falha ao buscar histórico da conversa");
-  }
+//   if (!res.ok) {
+//     console.error("Erro ao buscar histórico:", res.status, await res.text());
+//     throw new Error("Falha ao buscar histórico da conversa");
+//   }
 
-  const data: MensagemBruta[] = await res.json();
+//   const data: MensagemBruta[] = await res.json();
 
-  // Mapeia para o tipo Mensagem do frontend
-  return data.map(
-    (item): Mensagem => ({
-      id: item.id || crypto.randomUUID(), // Usa ID do backend se existir, senão gera um
-      content: item.content,
-      sender: item.type === "ai" ? "bot" : "user", // Mapeia 'human' para 'user'
-      timestamp: item.created_at,
-    }),
-  );
-};
+//   // Mapeia para o tipo Mensagem do frontend
+//   return data.map(
+//     (item): Mensagem => ({
+//       id: item.id || crypto.randomUUID(), // Usa ID do backend se existir, senão gera um
+//       content: item.content,
+//       sender: item.type === "ai" ? "bot" : "user", // Mapeia 'human' para 'user'
+//       timestamp: item.created_at,
+//     }),
+//   );
+// };
 
 /**
  * Envia uma nova mensagem para uma conversa.
@@ -364,4 +262,172 @@ export const createNewTag = async (nome: string, cor: string): Promise<TagGlobal
     throw new Error("Falha ao criar nova tag");
   }
   return await res.json(); // Retorna a tag criada (com ID do banco)
+};
+
+const EVOLUTION_API_BASE_URL = "https://evo.brxlabs.com.br";
+const EVOLUTION_API_KEY = "AB2A599EBA82-40F5-997D-27D1AC5FB00D";
+const EVOLUTION_INSTANCE_NAME = "Giovana - GI";
+
+type ContextInfo = Record<string, unknown>;
+
+interface ExtendedTextMessageDetails {
+  text: string;
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  matchedText?: string;
+  jpegThumbnail?: string; // Geralmente uma string base64
+  contextInfo?: ContextInfo;
+  // Adicione outras propriedades comuns do extendedTextMessage se necessário
+}
+
+// Detalhes para mensagens de imagem
+interface ImageMessageDetails {
+  url?: string; // URL para download da imagem
+  mimetype: string; // Ex: "image/jpeg", "image/png"
+  caption?: string;
+  fileSha256?: string; // Hash do arquivo
+  fileEncSha256?: string; // Hash do arquivo encriptado
+  mediaKey?: string; // Chave para decriptar a mídia
+  directPath?: string; // Caminho direto para o arquivo no servidor do WhatsApp
+  fileLength: string; // Tamanho do arquivo (a API retorna como string)
+  height: number;
+  width: number;
+  jpegThumbnail?: string; // Miniatura em base64
+  mediaKeyTimestamp?: string; // Timestamp da mediaKey (a API retorna como string)
+  // Outras propriedades que podem existir em imageMessage
+}
+
+// Detalhes para mensagens de contato
+interface ContactMessageDetails {
+  displayName: string;
+  vcard: string; // String no formato VCard
+  contextInfo?: ContextInfo;
+}
+
+interface EvolutionMessageRecord {
+  id: string;
+  key: {
+    id: string;
+    fromMe: boolean;
+    remoteJid: string;
+    participant?: string; // Para mensagens de grupo
+  };
+  pushName?: string;
+  messageType: string;
+  message: {
+    conversation?: string;
+    extendedTextMessage?: ExtendedTextMessageDetails;
+    imageMessage?: ImageMessageDetails;
+    contactMessage?: ContactMessageDetails;
+    // Adicione outros tipos de mensagem conforme necessário
+  };
+  messageTimestamp: number;
+}
+
+interface EvolutionMessagesResponse {
+  messages: {
+    total: number;
+    pages: number;
+    currentPage: number;
+    records: EvolutionMessageRecord[];
+  };
+}
+
+export type Mensagem = {
+  id: string;
+  content: string;
+  sender: "bot" | "user";
+  timestamp: string;
+};
+
+/**
+ * Busca o histórico de mensagens de uma conversa específica direto da evolution api.
+ */
+export const getHistoricoConversa = async (sessionId: string): Promise<Mensagem[]> => {
+  console.log("SessionId recebido pela função:", sessionId);
+  const url = `${EVOLUTION_API_BASE_URL}/chat/findMessages/${EVOLUTION_INSTANCE_NAME}`;
+  const remoteJidParaAPI = `${sessionId}@s.whatsapp.net`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      apikey: EVOLUTION_API_KEY,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      where: {
+        key: {
+          remoteJid: remoteJidParaAPI,
+        },
+      },
+    }),
+  };
+
+  try {
+    const res = await fetch(url, options);
+
+    if (!res.ok) {
+      const errorBody = await res.text();
+      console.error("Erro ao buscar histórico da Evolution API:", res.status, errorBody);
+      throw new Error(`Falha ao buscar histórico da conversa (Evolution API): ${res.status}`);
+    }
+
+    const apiData = await res.json();
+
+    const evolutionResponse = apiData as EvolutionMessagesResponse;
+
+    if (!evolutionResponse || !evolutionResponse.messages || !evolutionResponse.messages.records) {
+      console.warn(
+        "Resposta da API não contém 'messages.records' ou está em formato inesperado para o remoteJid:",
+        sessionId,
+        evolutionResponse,
+      );
+      return [];
+    }
+
+    const records: EvolutionMessageRecord[] = evolutionResponse.messages.records;
+
+    const mensagensFormatadas: Mensagem[] = records.map((record): Mensagem => {
+      let content = `Tipo de mensagem '${record.messageType}' não traduzido.`;
+
+      if (record.messageType === "conversation" && record.message?.conversation) {
+        content = record.message.conversation;
+      } else if (
+        record.messageType === "extendedTextMessage" &&
+        record.message?.extendedTextMessage?.text
+      ) {
+        content = record.message.extendedTextMessage.text;
+      } else if (record.messageType === "imageMessage" && record.message?.imageMessage) {
+        content = record.message.imageMessage.caption || "Imagem";
+      } else if (record.messageType === "contactMessage" && record.message?.contactMessage) {
+        const vcard = record.message.contactMessage.vcard;
+        let contactName = record.message.contactMessage.displayName;
+        if (!contactName && vcard) {
+          const fnMatch = vcard.match(/^FN:(.*)$/m);
+          if (fnMatch && fnMatch[1]) {
+            contactName = fnMatch[1];
+          }
+        }
+        content = `Contato: ${contactName || "Desconhecido"}`;
+      }
+      // Adicione mais 'else if' para outros tipos de mensagem que você quer suportar
+
+      return {
+        id: record.id || record.key.id,
+        content: content,
+        sender: record.key.fromMe ? "bot" : "user",
+        timestamp: new Date((record.messageTimestamp || 0) * 1000).toISOString(),
+      };
+    });
+
+    mensagensFormatadas.sort(
+      (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+    );
+
+    return mensagensFormatadas;
+  } catch (error) {
+    console.error("Erro na função getHistoricoConversa (Evolution API Catch Block):", error);
+    throw error;
+  }
 };

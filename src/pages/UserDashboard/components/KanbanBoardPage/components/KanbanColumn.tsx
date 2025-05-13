@@ -40,7 +40,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
     <div
       ref={setNodeRef}
       style={style}
-      className={`w-full md:w-[300px] lg:w-[320px] bg-gray-100 rounded-xl shadow-sm flex flex-col flex-shrink-0 h-full max-h-[calc(100vh-12rem)] ${
+      className={`w-full md:w-[298px] lg:w-[298px] bg-gray-100 rounded-xl shadow-sm flex flex-col flex-shrink-0 h-full max-h-[calc(100vh-12rem)] ${
         isOverlay ? "ring-2 ring-indigo-500 shadow-2xl" : ""
       }`}
     >
@@ -86,13 +86,17 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
           </button>
         </div>
       </div>
-      <div className="flex-grow p-3 overflow-y-auto">
-        <SortableContext items={taskIds}>
+      <div className="flex-grow p-3 overflow-y-auto overflow-x-hidden">
+        {" "}
+        {/* Adicionado overflow-x-hidden */}
+        {/* A classe md:w-[298px] foi removida daqui, pois a largura da coluna já está definida no container pai */}
+        <SortableContext items={taskIds} strategy={undefined}>
           {tasks.length > 0 ? (
             tasks.map((task) => <TaskCard key={task.id} task={task} />)
           ) : (
             <div className="flex items-center justify-center h-full min-h-[80px]">
-              <p className="text-xs text-gray-400 italic text-center py-4">Nenhum lead.</p>
+              {" "}
+              <p className="text-xs text-gray-400 italic text-center py-4">Nenhum lead.</p>{" "}
             </div>
           )}
         </SortableContext>

@@ -1,8 +1,18 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Briefcase, DollarSign, GripVertical } from "lucide-react";
+import { DollarSign, GripVertical, Headset } from "lucide-react";
 import React from "react";
-import { Task } from "../types/kanban";
+
+export interface Task {
+  id: string | number;
+  columnId: string | number;
+  name: string;
+  value?: number | null;
+  company?: string;
+  avatarSeed?: string;
+  kanban_order?: number;
+}
+
 import AvatarPlaceholder from "./AvatarPlaceholder";
 
 interface TaskCardProps {
@@ -13,7 +23,7 @@ interface TaskCardProps {
 const TaskCard: React.FC<TaskCardProps> = ({ task, isOverlay }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: task.id,
-    data: { type: "Task", task },
+    data: { type: "Task", task: { ...task } },
   });
 
   const style = {
@@ -33,18 +43,24 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, isOverlay }) => {
         isOverlay ? "ring-2 ring-indigo-500 shadow-2xl cursor-grabbing z-50" : "cursor-grab"
       } mb-3 last:mb-0 transition-shadow duration-200`}
     >
-      <div className="flex justify-between items-center mb-2">
-        {task.avatarSeed && (
-          <AvatarPlaceholder
-            className="mr-2"
-            seed={task.avatarSeed}
-            size="w-6 h-6"
-            textSize="text-[9px]"
-          />
-        )}
-        <h4 className="text-sm font-semibold text-gray-800 leading-tight flex-grow mr-2 break-words">
-          {task.name}
-        </h4>
+      <div className="flex justify-between items-start mb-2">
+        <div className="flex items-center flex-grow min-w-0 mr-2">
+          {" "}
+          {task.avatarSeed && (
+            <AvatarPlaceholder
+              className="mr-2 flex-shrink-0"
+              seed={task.avatarSeed}
+              size="w-6 h-6"
+              textSize="text-[9px]"
+            />
+          )}
+          <h4
+            className="text-sm font-semibold text-gray-800 leading-tight break-words truncate"
+            title={task.name}
+          >
+            {task.name}
+          </h4>
+        </div>
         <button
           {...listeners}
           className="p-1 text-gray-400 hover:text-gray-600 cursor-grab active:cursor-grabbing touch-none flex-shrink-0"
@@ -53,19 +69,22 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, isOverlay }) => {
           <GripVertical size={16} />
         </button>
       </div>
-      <div className="flex items-center space-x-2 mb-2">
-        {task.company && (
-          <p className="text-xs text-gray-500 flex items-center truncate">
-            <Briefcase className="w-3 h-3 mr-1 text-gray-400 flex-shrink-0" />
-            <span className="truncate">{task.company}</span>
-          </p>
-        )}
-      </div>
-      {task.value !== undefined && (
-        <p className="text-xs text-green-600 font-medium flex items-center">
-          <DollarSign className="w-3 h-3 mr-1 text-green-500 flex-shrink-0" />
-          {task.value.toLocaleString("pt-BR")}
-        </p>
+
+      {/* Informações do Lead */}
+      {task.company && (
+        <div className="flex items-center space-x-1 text-xs text-gray-500 mb-1 truncate">
+          <Headset className="w-3 h-3 text-gray-400 flex-shrink-0" />
+          <span className="truncate" title={task.company}>
+            {task.company}
+          </span>
+        </div>
+      )}
+
+      {typeof task.value === "number" && !isNaN(task.value) && (
+        <div className="flex items-center space-x-1 text-xs text-green-600 font-medium">
+          <DollarSign className="w-3 h-3 text-green-500 flex-shrink-0" />
+          <span>{task.value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </div>
       )}
     </div>
   );

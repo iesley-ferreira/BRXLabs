@@ -20,8 +20,6 @@ export default function LeadsTable() {
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
-          console.log(data);
-
           setLeads(data);
         } else {
           console.error("Resposta inválida, esperava array!");

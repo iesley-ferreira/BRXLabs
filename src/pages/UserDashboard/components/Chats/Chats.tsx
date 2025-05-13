@@ -10,7 +10,6 @@ import {
   User,
 } from "lucide-react"; // Importar Info e XIcon
 import React, { useEffect, useRef, useState } from "react";
-// Importar TODAS as funções necessárias do chatService
 import {
   addTagToLead,
   createNewTag,
@@ -22,11 +21,8 @@ import {
   removeTagFromLead,
   updateLeadNote,
 } from "./chatService";
-// Ajuste o caminho se o LeadInfoPanel estiver em um arquivo separado
 import LeadInfoPanel from "./components/LeadInfoPanel";
-// Ou defina LeadInfoPanel aqui se ele foi integrado anteriormente
 
-// Tipos (mantidos como antes)
 export type Conversa = {
   id: string;
   nome: string;
@@ -45,7 +41,6 @@ export type Mensagem = {
   timestamp: string;
 };
 
-// Componente AvatarPlaceholder (mantido como antes)
 const AvatarPlaceholder: React.FC<{ seed?: string; size?: number; className?: string }> = ({
   seed,
   size = 10,
@@ -89,7 +84,6 @@ const Chats: React.FC = () => {
 
   const mensagensEndRef = useRef<null | HTMLDivElement>(null);
 
-  // Funções (mantidas como antes)
   const scrollToBottom = () => {
     mensagensEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -196,7 +190,6 @@ const Chats: React.FC = () => {
     return data.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
   };
 
-  // Funções de Callback (mantidas como antes)
   const handleUpdateNota = async (leadId: string, novaNota: string) => {
     try {
       await updateLeadNote(leadId, novaNota);
@@ -333,7 +326,6 @@ const Chats: React.FC = () => {
       </div>
 
       {/* Área de Mensagens Principal */}
-      {/* --- AJUSTE 1: Garantir flex-col e h-full --- */}
       <div
         className={`flex-1 flex flex-col h-full bg-white transition-all duration-300 ease-in-out relative ${
           conversaAtiva ? "md:flex" : "hidden md:flex md:items-center md:justify-center"
@@ -341,22 +333,20 @@ const Chats: React.FC = () => {
       >
         {conversaAtiva ? (
           <>
-            {/* --- AJUSTE 2: Cabeçalho Inteiro Clicável + Ícone Info --- */}
             <div
               className="p-3 flex items-center space-x-3 bg-gray-100/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10 cursor-pointer hover:bg-gray-200/80 transition-colors"
               onClick={() => {
-                // A verificação !conversaAtiva é redundante aqui, pois só renderiza se conversaAtiva existir
                 setSelectedLeadForInfo(conversaAtiva);
                 setIsLeadInfoPanelOpen(true);
               }}
-              title="Ver detalhes do lead" // Tooltip
+              title="Ver detalhes do lead"
             >
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setConversaAtiva(null);
-                }} // Impede que o clique no botão abra o painel
-                className="md:hidden p-1 text-gray-600 hover:text-[#615fff] rounded-full hover:bg-gray-300/50" // Ajuste no hover do botão
+                }}
+                className="md:hidden p-1 text-gray-600 hover:text-[#615fff] rounded-full hover:bg-gray-300/50"
                 title="Voltar para conversas"
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -364,18 +354,19 @@ const Chats: React.FC = () => {
               <AvatarPlaceholder seed={conversaAtiva.avatarSeed || conversaAtiva.nome} size={10} />
               <div className="flex-grow">
                 {" "}
-                {/* Ocupa espaço para empurrar o ícone para a direita */}
                 <p className="font-semibold text-gray-800 truncate">{conversaAtiva.nome}</p>
                 <p className="text-xs text-green-500">Online</p>
               </div>
               <Info className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0" />{" "}
-              {/* Ícone de Informação */}
             </div>
-            {/* --- FIM AJUSTE 2 --- */}
 
-            {/* --- AJUSTE 3: Área de Mensagens com flex-1 --- */}
-            {/* A div pai já é flex-col, então flex-1 aqui fará ela ocupar o espaço restante */}
-            <div className="flex-1 p-4 space-y-3 overflow-y-auto bg-[url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')] bg-contain z-[5]">
+            {/* --- Área de Mensagens --- */}
+            <div
+              className="flex-1 p-4 space-y-3 overflow-y-auto bg-contain z-[5]"
+              style={{
+                backgroundImage: `linear-gradient(rgb(108 0 239 / 14%), rgb(17 0 51 / 16%)), url('https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg')`,
+              }}
+            >
               {/* Conteúdo das mensagens (loading, lista, etc.) ... */}
               {isLoadingHistorico ? (
                 <div className="flex h-full items-center justify-center text-gray-500 p-4">
@@ -416,8 +407,8 @@ const Chats: React.FC = () => {
                     <div
                       className={`max-w-[70%] sm:max-w-[60%] px-3 py-2 rounded-lg shadow-sm ${
                         m.sender === "bot"
-                          ? "bg-[#E1FFC7]/90 backdrop-blur-sm text-gray-800 rounded-bl-none"
-                          : "bg-white/90 backdrop-blur-sm text-gray-800 rounded-br-none"
+                          ? "bg-[#E1FFC7]/90 backdrop-blur-sm text-gray-800 rounded-br-none"
+                          : "bg-white/90 backdrop-blur-sm text-gray-800  rounded-bl-none"
                       }`}
                     >
                       <p className="text-sm whitespace-pre-wrap break-words">{m.content}</p>
@@ -436,9 +427,7 @@ const Chats: React.FC = () => {
               )}
               <div ref={mensagensEndRef} />
             </div>
-            {/* --- FIM AJUSTE 3 --- */}
 
-            {/* Input (mantido como antes, ele fica fixo no final por causa do flex-col) */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -447,7 +436,6 @@ const Chats: React.FC = () => {
               className="p-2 sm:p-3 bg-gray-100/80 backdrop-blur-sm border-t border-gray-200 flex items-center space-x-2 sticky bottom-0 z-10 flex-shrink-0"
             >
               {" "}
-              {/* Adicionado flex-shrink-0 */}
               <button
                 type="button"
                 className="p-2 text-gray-500 hover:text-[#615fff] rounded-full hover:bg-gray-200"
@@ -485,7 +473,7 @@ const Chats: React.FC = () => {
         )}
       </div>
 
-      {/* Painel de Informações do Lead (mantido como antes) */}
+      {/* Painel de Informações do Lead */}
       {selectedLeadForInfo && (
         <LeadInfoPanel
           lead={selectedLeadForInfo}
