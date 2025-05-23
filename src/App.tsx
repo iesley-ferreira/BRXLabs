@@ -11,6 +11,7 @@ import HowItWorks from "./components/HowItWorks/HowItWorks";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import ServicesProvided from "./components/ServicesProvided/ServicesProvided";
 import Toolbox from "./components/Toolbox/Toolbox";
+import PricingSection from "./components/PricingSection/PricingSection";
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,9 @@ function App() {
       <ContactButton />
       <section id="services">
         <ServicesProvided />
+      </section>
+      <section id="prices">
+        <PricingSection />
       </section>
       <Toolbox />
       <section id="metodologia">
