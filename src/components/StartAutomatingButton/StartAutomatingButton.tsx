@@ -144,7 +144,7 @@ const StartAutomatingButton: React.FC = () => {
                 >
                   <div className="flex flex-col mb-4">
                     <label htmlFor="nome" className="text-gray-300 mb-1">
-                      Nome
+                      Nome Completo
                     </label>
                     <input
                       type="text"
@@ -160,7 +160,7 @@ const StartAutomatingButton: React.FC = () => {
 
                   <div className="flex flex-col mb-4">
                     <label htmlFor="telefone" className="text-gray-300 mb-1">
-                      Telefone
+                      Telefone (com DDD)
                     </label>
                     <input
                       type="tel"

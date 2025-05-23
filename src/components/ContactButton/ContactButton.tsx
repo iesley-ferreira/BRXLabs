@@ -154,8 +154,8 @@ export default function ContactButton() {
                   className="max-w-lg mx-auto bg-[#1A1A1A] p-8 rounded-lg"
                 >
                   <div className="flex flex-col mb-4">
-                    <label htmlFor="nome" className="text-gray-300 mb-1">
-                      Nome
+                    <label htmlFor="nome" className="text-gray-300 font-semibold mb-1">
+                      Nome Completo
                     </label>
                     <input
                       type="text"
@@ -170,8 +170,8 @@ export default function ContactButton() {
                   </div>
 
                   <div className="flex flex-col mb-4">
-                    <label htmlFor="telefone" className="text-gray-300 mb-1">
-                      Telefone
+                    <label htmlFor="telefone" className="text-gray-300 font-semibold mb-1">
+                      Telefone (com DDD)
                     </label>
                     <input
                       type="tel"
@@ -186,7 +186,7 @@ export default function ContactButton() {
                   </div>
 
                   <div className="flex flex-col mb-4">
-                    <label htmlFor="email" className="text-gray-300 mb-1">
+                    <label htmlFor="email" className="text-gray-300 font-semibold mb-1">
                       Email
                     </label>
                     <input

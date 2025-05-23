@@ -10,13 +10,10 @@ const Footer = () => {
           <a href="#" className="hover:text-white transition">
             Início
           </a>
-          <a href="#" className="hover:text-white transition">
+          <a href="#services" className="hover:text-white transition">
             Serviços
           </a>
-          <a href="#" className="hover:text-white transition">
-            Contato
-          </a>
-          <a href="#" className="hover:text-white transition">
+          <a href="#metodologia" className="hover:text-white transition">
             Sobre
           </a>
         </nav>
